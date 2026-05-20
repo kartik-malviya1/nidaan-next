@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "../components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingSocials from "@/components/FloatingSocials";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -149,6 +150,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <FloatingSocials />
         <Footer />
       </body>
     </html>
