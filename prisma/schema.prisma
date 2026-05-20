@@ -13,3 +13,32 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Gallery {
+  id        String   @id @default(uuid())
+  category  String
+  title     String
+  url       String // Cloudinary
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Donation {
+  id            String   @id @default(uuid())
+  panCard       String // Required for Indian tax compliance
+  phoneNumber   String
+  amount        Decimal  @db.Decimal(10, 2) // Prevents floating-point rounding errors
+  name          String
+  transactionId String   @unique // Tracks UTR ID / Transaction ID uniquely
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
