@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 const FacebookIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -45,7 +45,7 @@ const Footer = () => {
           {" "}
           {/* Brand */}
           <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <Link to="/" className="inline-block mb-6">
+            <Link href="/" className="inline-block mb-6">
               {" "}
               <img
                 src="/logo.jpg"
@@ -96,7 +96,7 @@ const Footer = () => {
               {quickLinks.map((link) => (
                 <li key={link.name}>
                   <Link
-                    to={link.path}
+                    href={link.path}
                     className="text-sm hover:text-[#ffcc00] transition-colors inline-flex items-center gap-1 group"
                   >
                     {" "}
@@ -121,7 +121,7 @@ const Footer = () => {
               {services.map((item) => (
                 <li key={item}>
                   <Link
-                    to="/services"
+                    href="/services"
                     className="text-sm hover:text-[#ffcc00] transition-colors"
                   >
                     {item}

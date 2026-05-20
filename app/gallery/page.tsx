@@ -62,7 +62,7 @@ const Gallery = () => {
             <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
                 <div className="absolute inset-0">
                     <img
-                        src="/assets/img29.jpeg"
+                        src="/image_1.png"
                         alt="Gallery"
                         className="w-full h-full object-cover"
                     />

@@ -67,10 +67,10 @@ const Services = () => {
     return (
         <div>
             {/* Hero */}
-            <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+            <section className="relative pt-32 pb-20 lg:pt-34 lg:pb-28 overflow-hidden">
                 <div className="absolute inset-0">
                     <img
-                        src="/assets/img32.jpeg"
+                        src="/image_6.png"
                         alt="Therapy"
                         className="w-full h-full object-cover"
                     />
