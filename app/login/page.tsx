@@ -49,7 +49,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#09292f] overflow-hidden px-4 font-sans">
+    <div className="relative min-h-screen w-full flex items-center justify-center bg-[#000000] overflow-hidden px-4 font-sans">
       {/* Decorative Glows */}
       <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#ffcc00]/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-[#128999]/20 rounded-full blur-[100px] pointer-events-none" />

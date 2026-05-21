@@ -39,12 +39,25 @@ export interface DashboardStats {
     totalGalleryImages: number;
     totalDonations: number;
     totalDonationAmount: number;
+    totalContacts: number;
   };
   recentUploads: GalleryImage[];
   recentDonations: Donation[];
+  recentContacts: Contact[];
 }
 
 export interface ApiError {
   message: string;
   errors?: Record<string, string[]>;
 }
+
+export interface Contact {
+  id: string;
+  name: string;
+  email: string | null;
+  phoneNumber: string;
+  message: string;
+  createdAt: string;
+  updatedAt: string;
+}
+

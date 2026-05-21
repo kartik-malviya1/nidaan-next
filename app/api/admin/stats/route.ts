@@ -8,8 +8,10 @@ export async function GET(req: Request) {
       totalGalleryCount,
       totalDonationCount,
       donationSumAggregate,
+      totalContactCount,
       recentUploads,
       recentDonations,
+      recentContacts,
     ] = await Promise.all([
       // 1. Total gallery images count
       prisma.gallery.count(),
@@ -24,14 +26,23 @@ export async function GET(req: Request) {
         },
       }),
 
-      // 4. Recent uploads (last 5)
+      // 4. Total contact messages count
+      prisma.contact.count(),
+
+      // 5. Recent uploads (last 5)
       prisma.gallery.findMany({
         orderBy: { createdAt: "desc" },
         take: 5,
       }),
 
-      // 5. Recent donations (last 5)
+      // 6. Recent donations (last 5)
       prisma.donation.findMany({
+        orderBy: { createdAt: "desc" },
+        take: 5,
+      }),
+
+      // 7. Recent contacts (last 5)
+      prisma.contact.findMany({
         orderBy: { createdAt: "desc" },
         take: 5,
       }),
@@ -50,9 +61,11 @@ export async function GET(req: Request) {
         totalGalleryImages: totalGalleryCount,
         totalDonations: totalDonationCount,
         totalDonationAmount,
+        totalContacts: totalContactCount,
       },
       recentUploads,
       recentDonations: serializedRecentDonations,
+      recentContacts,
     });
   } catch (error) {
     console.error("Dashboard stats query error:", error);

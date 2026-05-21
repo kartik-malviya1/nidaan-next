@@ -14,6 +14,7 @@ import {
   ArrowUpRight,
   TrendingUp,
   HeartHandshake,
+  Mail,
 } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -52,8 +53,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats Row Skeleton */}
-        <div className="grid gap-6 md:grid-cols-3">
-          {[1, 2, 3].map((i) => (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {[1, 2, 3, 4].map((i) => (
             <Card key={i} className="border-[#e4e4e7] bg-white">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <Skeleton className="h-4 w-28 bg-[#dcf0f1]" />
@@ -107,7 +108,7 @@ export default function DashboardPage() {
     );
   }
 
-  const { stats, recentUploads, recentDonations } = data;
+  const { stats, recentUploads, recentDonations, recentContacts } = data;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -159,7 +160,7 @@ export default function DashboardPage() {
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="grid gap-6 md:grid-cols-3"
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
       >
         {/* Card 1: Total Donations Sum */}
         <motion.div variants={itemVariants}>
@@ -230,6 +231,29 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
         </motion.div>
+
+        {/* Card 4: Total Contact Inquiries */}
+        <motion.div variants={itemVariants}>
+          <Card className="relative overflow-hidden border border-[#dcf0f1] bg-white shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#ebf7f8] rounded-full blur-3xl opacity-50 group-hover:scale-125 transition-transform duration-300" />
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardDescription className="text-xs font-bold uppercase tracking-wider text-[#768385]">
+                Total Contact Inquiries
+              </CardDescription>
+              <div className="p-2.5 bg-[#ebf7f8] text-[#128999] rounded-xl">
+                <Mail className="h-5 w-5" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <CardTitle className="text-3xl font-extrabold text-[#144047]">
+                {stats.totalContacts}
+              </CardTitle>
+              <p className="text-xs text-[#768385] mt-1.5">
+                Visitor feedback messages received
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
       </motion.div>
 
       {/* Primary Panels Grid */}
@@ -287,6 +311,67 @@ export default function DashboardPage() {
                           </TableCell>
                           <TableCell className="px-6 py-4 text-xs text-[#768385]">
                             {formatDate(donation.createdAt)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="border border-[#dcf0f1] bg-white shadow-sm rounded-2xl">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle className="text-lg font-bold text-[#144047]">Recent Inquiries</CardTitle>
+                <CardDescription className="text-xs text-[#768385] mt-1">
+                  Latest visitor questions and contact messages.
+                </CardDescription>
+              </div>
+              <Link href="/admin/contact">
+                <Button variant="ghost" size="sm" className="text-xs font-bold text-[#128999] hover:bg-[#f0f9fa] hover:text-[#106f7e] cursor-pointer">
+                  <span>View All</span>
+                  <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </CardHeader>
+            <CardContent className="p-0">
+              {recentContacts.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                  <div className="p-4 bg-[#ebf7f8] rounded-full text-[#128999] mb-3">
+                    <Mail className="h-8 w-8" />
+                  </div>
+                  <h4 className="font-bold text-[#144047]">No inquiries recorded</h4>
+                  <p className="text-xs text-[#768385] max-w-xs mt-1">
+                    Inquiries will appear here when visitors fill the contact form.
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader className="bg-[#f0f9fa]/50">
+                      <TableRow className="hover:bg-transparent border-b border-[#e4e4e7]">
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Name</TableHead>
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Phone Number</TableHead>
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Message Preview</TableHead>
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Date</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {recentContacts.map((contact) => (
+                        <TableRow key={contact.id} className="hover:bg-[#f0f9fa]/20 border-b border-[#e4e4e7]">
+                          <TableCell className="px-6 py-4 font-semibold text-[#144047]">
+                            {contact.name}
+                          </TableCell>
+                          <TableCell className="px-6 py-4 text-sm text-[#768385]">
+                            {contact.phoneNumber}
+                          </TableCell>
+                          <TableCell className="px-6 py-4 text-xs text-[#768385] max-w-[220px] truncate">
+                            {contact.message}
+                          </TableCell>
+                          <TableCell className="px-6 py-4 text-xs text-[#768385]">
+                            {formatDate(contact.createdAt)}
                           </TableCell>
                         </TableRow>
                       ))}

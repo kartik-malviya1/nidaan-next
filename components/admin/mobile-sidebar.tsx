@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Image as ImageIcon,
   HeartHandshake,
+  Mail,
   Sparkles,
 } from "lucide-react";
 
@@ -32,6 +33,11 @@ const navItems = [
     name: "Donations",
     href: "/admin/donations",
     icon: HeartHandshake,
+  },
+  {
+    name: "Contacts",
+    href: "/admin/contact",
+    icon: Mail,
   },
 ];
 

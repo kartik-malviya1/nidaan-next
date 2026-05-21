@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Image as ImageIcon,
   HeartHandshake,
+  Mail,
   ChevronLeft,
   ChevronRight,
   Sparkles,
@@ -37,6 +38,11 @@ const navItems = [
     href: "/admin/donations",
     icon: HeartHandshake,
   },
+  {
+    name: "Contacts",
+    href: "/admin/contact",
+    icon: Mail,
+  },
 ];
 
 export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
@@ -47,7 +53,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
       animate={{ width: isCollapsed ? 80 : 260 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className={cn(
-        "h-screen bg-[#09292f] border-r border-[#164a53]/30 flex flex-col justify-between text-white relative shadow-xl z-20"
+        "h-screen bg-[#000000] border-r border-[#164a53]/30 flex flex-col justify-between text-white relative shadow-xl z-20"
       )}
     >
       {/* Brand Header Section */}
@@ -92,7 +98,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                   "h-5 w-5 shrink-0 transition-transform group-hover:scale-110",
                   isActive ? "text-[#ffcc00]" : "text-[#86cbd0]"
                 )} />
-                
+
                 {!isCollapsed && (
                   <motion.span
                     initial={{ opacity: 0, x: -10 }}

@@ -11,6 +11,7 @@ export async function middleware(req: NextRequest) {
   const isApiGallery = pathname.startsWith("/api/gallery");
   const isApiDonation = pathname.startsWith("/api/donation");
   const isApiStats = pathname.startsWith("/api/admin/stats");
+  const isApiContact = pathname.startsWith("/api/contact");
 
   // Determine if this API request needs admin authentication
   let apiNeedsAuth = false;
@@ -21,6 +22,10 @@ export async function middleware(req: NextRequest) {
       apiNeedsAuth = true;
     }
   } else if (isApiDonation) {
+    if (req.method === "GET") {
+      apiNeedsAuth = true;
+    }
+  } else if (isApiContact) {
     if (req.method === "GET") {
       apiNeedsAuth = true;
     }
@@ -103,5 +108,6 @@ export const config = {
     "/api/gallery/:path*",
     "/api/donation/:path*",
     "/api/admin/stats/:path*",
+    "/api/contact/:path*",
   ],
 };

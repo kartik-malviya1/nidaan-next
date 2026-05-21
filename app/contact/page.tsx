@@ -1,7 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactSchema, ContactInput } from "@/lib/validations";
 import {
     MapPin,
     Phone,
@@ -11,9 +14,59 @@ import {
     HeartHandshake,
     ArrowRight,
     Send,
+    Loader2,
+    CheckCircle2,
+    AlertCircle,
 } from "lucide-react";
 
 const Contact = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<ContactInput>({
+        resolver: zodResolver(contactSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            phoneNumber: "",
+            message: "",
+        },
+    });
+
+    const onSubmit = async (data: ContactInput) => {
+        setIsSubmitting(true);
+        setSubmitError(null);
+        setSubmitSuccess(false);
+
+        try {
+            const res = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!res.ok) {
+                const errData = await res.json();
+                throw new Error(errData.message || "Failed to submit message");
+            }
+
+            setSubmitSuccess(true);
+            reset();
+        } catch (err: any) {
+            console.error(err);
+            setSubmitError(err.message || "Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
     return (
         <div>
             {/* Hero */}
@@ -145,54 +198,100 @@ const Contact = () => {
                                 <h3 className="text-xl font-display font-bold text-black mb-6">
                                     Send us a message
                                 </h3>
-                                <form className="space-y-5">
+
+                                {submitSuccess && (
+                                    <div className="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl flex items-start gap-3">
+                                        <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
+                                        <div>
+                                            <h5 className="font-bold text-sm">Message Sent Successfully!</h5>
+                                            <p className="text-xs text-emerald-700 mt-0.5">Thank you for reaching out. We will get back to you soon.</p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {submitError && (
+                                    <div className="mb-6 p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-xl flex items-start gap-3">
+                                        <AlertCircle className="h-5 w-5 text-rose-600 shrink-0 mt-0.5" />
+                                        <div>
+                                            <h5 className="font-bold text-sm">Failed to Send Message</h5>
+                                            <p className="text-xs text-rose-700 mt-0.5">{submitError}</p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                                     <div className="grid sm:grid-cols-2 gap-4">
                                         <div>
                                             <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">
-                                                Full Name
+                                                Full Name <span className="text-rose-500">*</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 placeholder="John Doe"
-                                                className="input"
+                                                className={`input ${errors.name ? "border-rose-400 focus:border-rose-400" : ""}`}
+                                                {...register("name")}
                                             />
+                                            {errors.name && (
+                                                <p className="text-xs text-rose-500 mt-1 font-medium">{errors.name.message}</p>
+                                            )}
                                         </div>
                                         <div>
                                             <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">
-                                                Email Address
+                                                Email Address <span className="text-gray-400 font-normal lowercase">(optional)</span>
                                             </label>
                                             <input
                                                 type="email"
                                                 placeholder="john@example.com"
-                                                className="input"
+                                                className={`input ${errors.email ? "border-rose-400 focus:border-rose-400" : ""}`}
+                                                {...register("email")}
                                             />
+                                            {errors.email && (
+                                                <p className="text-xs text-rose-500 mt-1 font-medium">{errors.email.message}</p>
+                                            )}
                                         </div>
                                     </div>
                                     <div>
                                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">
-                                            Phone Number
+                                            Phone Number <span className="text-rose-500">*</span>
                                         </label>
                                         <input
                                             type="tel"
                                             placeholder="+91 98765 43210"
-                                            className="input"
+                                            className={`input ${errors.phoneNumber ? "border-rose-400 focus:border-rose-400" : ""}`}
+                                            {...register("phoneNumber")}
                                         />
+                                        {errors.phoneNumber && (
+                                            <p className="text-xs text-rose-500 mt-1 font-medium">{errors.phoneNumber.message}</p>
+                                        )}
                                     </div>
                                     <div>
                                         <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block">
-                                            Message
+                                            Message <span className="text-rose-500">*</span>
                                         </label>
                                         <textarea
-                                            rows="4"
+                                            rows={4}
                                             placeholder="How can we help you?"
-                                            className="input resize-none"
+                                            className={`input resize-none ${errors.message ? "border-rose-400 focus:border-rose-400" : ""}`}
+                                            {...register("message")}
                                         ></textarea>
+                                        {errors.message && (
+                                            <p className="text-xs text-rose-500 mt-1 font-medium">{errors.message.message}</p>
+                                        )}
                                     </div>
                                     <button
                                         type="submit"
-                                        className="btn-primary w-full py-3.5 gap-2"
+                                        disabled={isSubmitting}
+                                        className="btn-primary w-full py-3.5 gap-2 justify-center cursor-pointer disabled:opacity-50"
                                     >
-                                        Send Message <Send size={16} />
+                                        {isSubmitting ? (
+                                            <>
+                                                Sending... <Loader2 size={16} className="animate-spin" />
+                                            </>
+                                        ) : (
+                                            <>
+                                                Send Message <Send size={16} />
+                                            </>
+                                        )}
                                     </button>
                                 </form>
                             </div>
