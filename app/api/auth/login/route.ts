@@ -55,9 +55,18 @@ export async function POST(req: Request) {
             token,
             user: safeUser,
         });
-    } catch (error) {
+    } catch (error: any) {
+        console.error("LOGIN ERROR:", error);
+
         return NextResponse.json(
-            { message: "Server Error" },
+            {
+                message: "Server Error",
+                error: error?.message || String(error),
+                stack:
+                    process.env.NODE_ENV === "development"
+                        ? error?.stack
+                        : undefined,
+            },
             { status: 500 }
         );
     }
