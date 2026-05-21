@@ -1,5 +1,5 @@
 import { PrismaClient } from "../lib/generated/prisma/client";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 
 // Load environment variables
