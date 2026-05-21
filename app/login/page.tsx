@@ -62,7 +62,7 @@ export default function LoginPage() {
         className="w-full max-w-md z-10"
       >
         <div className="text-center mb-6">
-          <img src="/logo.jpg" alt="Nidaan Logo" className=" h-16 w-auto ml-36 mb-4" />
+          <img src="/logo.jpg" alt="Nidaan Logo" className=" h-16 w-auto mx-auto mb-4" />
           {/* <h1 className="text-3xl font-extrabold text-white tracking-tight">NIDAAN</h1> */}
           <p className="text-[#86cbd0] text-sm font-semibold tracking-wider mt-1 uppercase">Admin Portal</p>
         </div>
