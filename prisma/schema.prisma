@@ -25,8 +25,8 @@ model User {
 
 model Gallery {
   id        String   @id @default(uuid())
-  category  String
-  title     String
+  category  String?
+  title     String?
   url       String // Cloudinary
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

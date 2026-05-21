@@ -1,11 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, Heart, Users, Camera, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+interface GalleryImage {
+    id: string;
+    category: string | null;
+    title: string | null;
+    url: string;
+    createdAt: string;
+}
+
 const Gallery = () => {
     const [filter, setFilter] = useState("All");
+    const [images, setImages] = useState<GalleryImage[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const categories = [
         "All",
@@ -17,44 +27,27 @@ const Gallery = () => {
         "Events",
     ];
 
-    const items = [
-        {
-            id: 1,
-            cat: "Therapy",
-            title: "Sensory Session",
-            img: "/assets/img21.jpeg",
-        },
-        {
-            id: 2,
-            cat: "Classroom",
-            title: "Group Learning",
-            img: "/assets/img22.jpeg",
-        },
-        { id: 3, cat: "Sports", title: "Winter Games", img: "/assets/img23.jpeg" },
-        {
-            id: 4,
-            cat: "Art & Theatre",
-            title: "Stage Performance",
-            img: "/assets/img24.jpeg",
-        },
-        {
-            id: 5,
-            cat: "Workshops",
-            title: "Parent Training",
-            img: "/assets/img25.jpeg",
-        },
-        { id: 6, cat: "Events", title: "Republic Day", img: "/assets/img26.jpeg" },
-        {
-            id: 7,
-            cat: "Therapy",
-            title: "Speech Therapy",
-            img: "/assets/img27.jpeg",
-        },
-        { id: 8, cat: "Classroom", title: "One-on-One", img: "/assets/img28.jpeg" },
-    ];
+    useEffect(() => {
+        const fetchImages = async () => {
+            try {
+                setIsLoading(true);
+                const res = await fetch("/api/gallery");
+                if (!res.ok) throw new Error("Failed to fetch gallery images");
+                const data = await res.json();
+                setImages(data);
+            } catch (err: any) {
+                console.error("Failed to load gallery:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchImages();
+    }, []);
 
-    const filteredItems =
-        filter === "All" ? items : items.filter((item) => item.cat === filter);
+    const filteredItems = images.filter((item) => {
+        if (filter === "All") return true;
+        return item.category?.toLowerCase() === filter.toLowerCase();
+    });
 
     return (
         <div>
@@ -107,38 +100,55 @@ const Gallery = () => {
                     </div>
 
                     {/* Grid */}
-                    <motion.div
-                        layout
-                        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
-                    >
-                        <AnimatePresence mode="popLayout">
-                            {filteredItems.map((item) => (
-                                <motion.div
-                                    key={item.id}
-                                    layout
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.95 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="group relative h-64 rounded-2xl overflow-hidden cursor-pointer"
-                                >
-                                    <img
-                                        src={item.img}
-                                        alt={item.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                                        <div className="text-white">
-                                            <span className="text-[10px] font-semibold uppercase tracking-widest text-[#FFCC00] mb-1 block">
-                                                {item.cat}
-                                            </span>
-                                            <h4 className="font-bold">{item.title}</h4>
-                                        </div>
-                                    </div>
-                                </motion.div>
+                    {isLoading ? (
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {[...Array(8)].map((_, i) => (
+                                <div key={i} className="animate-pulse bg-slate-100 rounded-2xl h-64 flex flex-col justify-end p-5">
+                                    <div className="h-4 bg-slate-200 rounded w-1/3 mb-2"></div>
+                                    <div className="h-6 bg-slate-200 rounded w-2/3"></div>
+                                </div>
                             ))}
-                        </AnimatePresence>
-                    </motion.div>
+                        </div>
+                    ) : filteredItems.length === 0 ? (
+                        <div className="text-center py-20 bg-slate-50 rounded-2xl border border-slate-100">
+                            <Camera className="w-12 h-12 text-slate-300 mx-auto mb-4" />
+                            <h3 className="font-bold text-lg text-slate-700 mb-1">No Moments Found</h3>
+                            <p className="text-slate-400 text-sm">We haven't added any photographs for this category yet.</p>
+                        </div>
+                    ) : (
+                        <motion.div
+                            layout
+                            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+                        >
+                            <AnimatePresence mode="popLayout">
+                                {filteredItems.map((item) => (
+                                    <motion.div
+                                        key={item.id}
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="group relative h-64 rounded-2xl overflow-hidden cursor-pointer"
+                                    >
+                                        <img
+                                            src={item.url}
+                                            alt={item.title || "Gallery Image"}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                                            <div className="text-white">
+                                                <span className="text-[10px] font-semibold uppercase tracking-widest text-[#FFCC00] mb-1 block">
+                                                    {item.category || "General"}
+                                                </span>
+                                                <h4 className="font-bold">{item.title || "Untitled"}</h4>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </motion.div>
+                    )}
                 </div>
             </section>
 

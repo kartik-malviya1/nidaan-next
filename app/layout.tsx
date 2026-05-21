@@ -131,11 +131,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+import { headers } from "next/headers";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const isAdminOrLogin = pathname.startsWith("/admin") || pathname.startsWith("/login");
+
   return (
     <html
       lang="en"
@@ -148,10 +154,10 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
+        {!isAdminOrLogin && <Navbar />}
         {children}
-        <FloatingSocials />
-        <Footer />
+        {!isAdminOrLogin && <FloatingSocials />}
+        {!isAdminOrLogin && <Footer />}
       </body>
     </html>
   );
