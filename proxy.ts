@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/lib/auth";
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Add x-pathname header so Server Layouts can read the current URL/path
