@@ -1,74 +1,173 @@
-import React from 'react'
+// @ts-nocheck
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Quote, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 
 const Testimonials = () => {
-  const testimonials = [
+  // Your base testimonials
+  const baseTestimonials = [
     {
-      text: "Nidaan transformed our child's communication skills and confidence. The support we received as parents was equally valuable.",
-      author: 'Parent of Arjun',
-      role: 'Bhopal Center',
-      image: '/assets/img13.jpeg',
+      text: "There is a significant improvement in Shivansh's eye contact and sitting tolerance. He has also started communicating his needs.",
+      author: "Shivansh’s Father",
     },
     {
-      text: "The therapies and personalized attention gave our child a completely new direction. We are forever grateful to the team.",
-      author: 'Meera Sharma',
-      role: 'Indore Center',
-      image: '/assets/img14.jpeg',
+      text: "My child is very happy and comfortable going to school. He is eager to learn more, the teachers and staff are very supportive.",
+      author: "Annirudh's Parents",
     },
     {
-      text: "A truly inclusive space where every child is treated with dignity. The progress we see every month is remarkable.",
-      author: 'Rajesh Kumar',
-      role: 'Parent',
-      image: '/assets/img15.jpeg',
+      text: "My child is very happy and comfortable going to school. He is eager to learn more, the teachers and staff are very supportive.",
+      author: "Isha’s Parents",
     },
+    {
+      text: "Nidaan has given a beautiful and secure environment to my child where he learns while playing and does it with joy. Special thanks to all the teachers and therapists.",
+      author: "Yuvaan’s Mother",
+    },
+    {
+      text: "Akshat has shown great progress in his fine motor skills and speech. He is now more interactive and loves coming to Nidaan. Thank you to the entire team for their dedication.",
+      author: "Akshat Tiwari’s Mother",
+    },
+    {
+      text: "Nidaan has helped Rudransh become more independent in his daily routine. The staff is very cooperative and handles children with immense love and care.",
+      author: "Rudransh Rana’s Mother",
+    },
+    {
+      text: "We are quite satisfied and have seen good improvement's in our child's behaviour.",
+      author: "Veer's Parents",
+    }
   ]
 
+  /// Duplicate for the infinite loop
+  const scrollingTestimonials = [...baseTestimonials, ...baseTestimonials]
+
+  const scrollContainerRef = useRef(null)
+  const [isPaused, setIsPaused] = useState(false)
+
+  // Drag state variables
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
+
+  // Auto-scroll loop
+  useEffect(() => {
+    let animationId;
+    const scroll = () => {
+      const container = scrollContainerRef.current
+      if (container && !isPaused && !isDragging) {
+        container.scrollLeft += 0.8; // Adjust auto-scroll speed here (lower = slower)
+
+        // Seamless infinite loop: snap back to start when reaching the middle
+        if (container.scrollLeft >= container.scrollWidth / 2) {
+          container.scrollLeft = 0;
+        }
+      }
+      animationId = requestAnimationFrame(scroll)
+    }
+
+    animationId = requestAnimationFrame(scroll)
+    return () => cancelAnimationFrame(animationId)
+  }, [isPaused, isDragging])
+
+  // --- Mouse Drag Handlers ---
+  const handleMouseDown = (e) => {
+    setIsDragging(true)
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft)
+    setScrollLeft(scrollContainerRef.current.scrollLeft)
+  }
+
+  const handleMouseLeave = () => {
+    setIsDragging(false)
+    setIsPaused(false) // Resume auto-scroll when mouse leaves entirely
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return
+    e.preventDefault()
+    const x = e.pageX - scrollContainerRef.current.offsetLeft
+    const walk = (x - startX) * 2 // Drag sensitivity multiplier
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk
+  }
+
   return (
-    <section className="section-padding bg-amber-50">
-      <div className="section-container">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#F90D41] mb-4 block">Testimonials</span>
-          <h2 className="text-3xl lg:text-4xl font-display font-bold text-black mb-4">
-            Stories From Our Families
-          </h2>
-          <p className="text-gray-600 leading-relaxed">
-            Hear from families who have experienced the Nidaan difference.
-          </p>
+    <section className="relative w-full max-w-full mx-auto sm:h-[100vh] bg-[#ffcc00]/95 brightness-90 flex flex-col py-12 overflow-hidden select-none">
+
+      {/* --- Decorative Grid Dots --- */}
+      <div className="absolute top-6 right-6 grid grid-cols-5 gap-y-3 gap-x-2 opacity-70">
+        {[...Array(25)].map((_, i) => (
+          <div key={`tr-${i}`} className="w-1 h-1 bg-white rounded-full" />
+        ))}
+      </div>
+      <div className="absolute bottom-6 right-6 grid grid-cols-5 gap-y-3 gap-x-2 opacity-70">
+        {[...Array(25)].map((_, i) => (
+          <div key={`br-${i}`} className="w-1 h-1 bg-white rounded-full" />
+        ))}
+      </div>
+      <div className="absolute bottom-6 left-6 grid grid-cols-5 gap-y-3 gap-x-2 opacity-70">
+        {[...Array(25)].map((_, i) => (
+          <div key={`bl-${i}`} className="w-1 h-1 bg-white rounded-full" />
+        ))}
+      </div>
+
+      <div className="w-full max-w-6xl mx-auto px-4 lg:px-8 flex flex-col items-center">
+        {/* --- Header: Title Layout --- */}
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 relative z-10">
+          <div className="text-center sm:text-center mx-auto font-serif">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-widest leading-tight block">
+              PARENT
+            </h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-widest leading-tight block">
+              TESTIMONIAL
+            </h2>
+          </div>
+          <div className="hidden sm:block w-[120px]"></div>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white p-8 rounded-2xl border border-amber-100 hover:shadow-lg hover:shadow-amber-100/60 transition-all duration-400 relative"
+      {/* --- Interactive Scrolling Marquee --- */}
+      <div className="relative w-full py-10">
+        <div
+          ref={scrollContainerRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={handleMouseLeave}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          className={`flex gap-8 md:gap-12 w-full px-4 overflow-x-auto [&::-webkit-scrollbar]:hidden ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar in Firefox/IE
+        >
+          {scrollingTestimonials.map((t, index) => (
+            <div
+              key={index}
+              className="relative w-[320px] md:w-[480px] shrink-0 flex flex-col items-center group pb-10"
             >
-              <Quote className="text-gray-100 mb-4" size={32} />
+              {/* Main Bubble Box */}
+              <div className="relative w-full h-[320px] md:h-[300px] bg-[#ffffff] rounded-[2.5rem] p-8 md:p-10 z-10 flex flex-col justify-start">
+                <h3 className="text-xl md:text-2xl font-bold text-[#3A3A3A] font-sans mb-2">
+                  {t.author}
+                </h3>
 
-              <div className="flex gap-1 mb-5">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Star key={s} size={14} fill="#f59e0b" className="text-[#FFCC00]" />
-                ))}
-              </div>
-
-              <p className="text-gray-600 text-sm leading-relaxed mb-8">"{t.text}"</p>
-
-              <div className="flex items-center gap-3 pt-5 border-t border-amber-50">
-                <img
-                  src={t.image}
-                  alt={t.author}
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-                <div>
-                  <h4 className="font-semibold text-black text-sm">{t.author}</h4>
-                  <p className="text-xs text-gray-400">{t.role}</p>
+                <div className="flex gap-1 mb-6">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} size={20} fill="#E2B13C" className="text-[#E2B13C]" />
+                  ))}
                 </div>
+
+                <p className="text-[#1A1A1A] text-base md:text-lg leading-relaxed font-normal font-sans line-clamp-6">
+                  {t.text}
+                </p>
+
+                {/* --- Rounded Speech Bubble Arrow --- */}
+                <div
+                  className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-20 h-20 bg-[#ffffff] rotate-45 rounded-br-xl -z-10"
+                />
               </div>
-            </motion.div>
+
+              {/* Shadow specific to each individual bubble */}
+              <div className="w-[70%] h-5 bg-black/20 rounded-[100%] blur-[8px] mt-10" />
+            </div>
           ))}
         </div>
       </div>
