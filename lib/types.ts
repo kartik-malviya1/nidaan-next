@@ -40,10 +40,12 @@ export interface DashboardStats {
     totalDonations: number;
     totalDonationAmount: number;
     totalContacts: number;
+    totalApplications: number;
   };
   recentUploads: GalleryImage[];
   recentDonations: Donation[];
   recentContacts: Contact[];
+  recentApplications: Application[];
 }
 
 export interface ApiError {
@@ -57,6 +59,23 @@ export interface Contact {
   email: string | null;
   phoneNumber: string;
   message: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Application {
+  id: string;
+  type: string;
+  name: string;
+  email: string;
+  phone: string;
+  city: string;
+  institution: string;
+  area: string;
+  duration: string | null;
+  availability: string | null;
+  motivation: string;
+  status: string;
   createdAt: string;
   updatedAt: string;
 }

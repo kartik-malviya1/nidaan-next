@@ -52,18 +52,32 @@ export default function VolunteerInternship() {
     const [form, setForm] = useState(initialForm);
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
+        setError('');
+        try {
+            const res = await fetch('/api/application', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.message || 'Failed to submit application');
+            }
             setSubmitted(true);
-        }, 1200);
+        } catch (err) {
+            setError(err.message || 'Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleTabChange = (tab) => {
@@ -212,8 +226,8 @@ export default function VolunteerInternship() {
                                         animate={{ opacity: 1, scale: 1 }}
                                         className="text-center py-10"
                                     >
-                                        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
-                                            <CheckCircle2 className="w-8 h-8 text-primary" />
+                                        <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center mx-auto mb-5">
+                                            <CheckCircle2 className="w-14 h-14 text-white fill-green-500" />
                                         </div>
                                         <h3 className="font-sans text-2xl mb-3">Application Received!</h3>
                                         <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mx-auto">
@@ -372,6 +386,12 @@ export default function VolunteerInternship() {
                                                     className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-sm
                                      focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none" />
                                             </div>
+
+                                            {error && (
+                                                <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-xs text-red-600 font-medium">
+                                                    {error}
+                                                </div>
+                                            )}
 
                                             <button
                                                 type="submit"

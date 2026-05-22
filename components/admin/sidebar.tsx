@@ -10,6 +10,7 @@ import {
   Image as ImageIcon,
   HeartHandshake,
   Mail,
+  Users,
   ChevronLeft,
   ChevronRight,
   Sparkles,
@@ -42,6 +43,11 @@ const navItems = [
     name: "Contacts",
     href: "/admin/contact",
     icon: Mail,
+  },
+  {
+    name: "Applications",
+    href: "/admin/applications",
+    icon: Users,
   },
 ];
 

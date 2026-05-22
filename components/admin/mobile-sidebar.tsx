@@ -10,6 +10,7 @@ import {
   Image as ImageIcon,
   HeartHandshake,
   Mail,
+  Users,
   Sparkles,
 } from "lucide-react";
 
@@ -38,6 +39,11 @@ const navItems = [
     name: "Contacts",
     href: "/admin/contact",
     icon: Mail,
+  },
+  {
+    name: "Applications",
+    href: "/admin/applications",
+    icon: Users,
   },
 ];
 

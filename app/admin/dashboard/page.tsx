@@ -15,6 +15,7 @@ import {
   TrendingUp,
   HeartHandshake,
   Mail,
+  FileText,
 } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -108,7 +109,7 @@ export default function DashboardPage() {
     );
   }
 
-  const { stats, recentUploads, recentDonations, recentContacts } = data;
+  const { stats, recentUploads, recentDonations, recentContacts, recentApplications } = data;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -160,7 +161,7 @@ export default function DashboardPage() {
         variants={containerVariants}
         initial="hidden"
         animate="show"
-        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
       >
         {/* Card 1: Total Donations Sum */}
         <motion.div variants={itemVariants}>
@@ -250,6 +251,29 @@ export default function DashboardPage() {
               </CardTitle>
               <p className="text-xs text-[#768385] mt-1.5">
                 Visitor feedback messages received
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        {/* Card 5: Total Applications */}
+        <motion.div variants={itemVariants}>
+          <Card className="relative overflow-hidden border border-[#dcf0f1] bg-white shadow-sm hover:shadow-md transition-all duration-300 rounded-2xl group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full blur-3xl opacity-50 group-hover:scale-125 transition-transform duration-300" />
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardDescription className="text-xs font-bold uppercase tracking-wider text-[#768385]">
+                Total Applications
+              </CardDescription>
+              <div className="p-2.5 bg-purple-50 text-purple-600 rounded-xl">
+                <FileText className="h-5 w-5" />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <CardTitle className="text-3xl font-extrabold text-[#144047]">
+                {stats.totalApplications}
+              </CardTitle>
+              <p className="text-xs text-[#768385] mt-1.5">
+                Volunteer & internship applications
               </p>
             </CardContent>
           </Card>
@@ -372,6 +396,83 @@ export default function DashboardPage() {
                           </TableCell>
                           <TableCell className="px-6 py-4 text-xs text-[#768385]">
                             {formatDate(contact.createdAt)}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card className="border border-[#dcf0f1] bg-white shadow-sm rounded-2xl">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <div>
+                <CardTitle className="text-lg font-bold text-[#144047]">Recent Applications</CardTitle>
+                <CardDescription className="text-xs text-[#768385] mt-1">
+                  Latest volunteer and internship applicants.
+                </CardDescription>
+              </div>
+              <Link href="/admin/applications">
+                <Button variant="ghost" size="sm" className="text-xs font-bold text-[#128999] hover:bg-[#f0f9fa] hover:text-[#106f7e] cursor-pointer">
+                  <span>View All</span>
+                  <ArrowUpRight className="ml-1 h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </CardHeader>
+            <CardContent className="p-0">
+              {recentApplications.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                  <div className="p-4 bg-purple-50 rounded-full text-purple-600 mb-3">
+                    <FileText className="h-8 w-8" />
+                  </div>
+                  <h4 className="font-bold text-[#144047]">No applications received</h4>
+                  <p className="text-xs text-[#768385] max-w-xs mt-1">
+                    Applications will show up here when visitors apply.
+                  </p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader className="bg-[#f0f9fa]/50">
+                      <TableRow className="hover:bg-transparent border-b border-[#e4e4e7]">
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Applicant</TableHead>
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Type</TableHead>
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Area</TableHead>
+                        <TableHead className="font-bold text-[#144047] h-10 px-6">Status</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {recentApplications.map((app) => (
+                        <TableRow key={app.id} className="hover:bg-[#f0f9fa]/20 border-b border-[#e4e4e7]">
+                          <TableCell className="px-6 py-4 font-semibold text-[#144047]">
+                            <div>
+                              <div className="font-semibold text-sm">{app.name}</div>
+                              <div className="text-[10px] text-[#768385]">{app.city}</div>
+                            </div>
+                          </TableCell>
+                          <TableCell className="px-6 py-4 text-xs font-semibold">
+                            <Badge variant="outline" className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full ${
+                              app.type === "Volunteer"
+                                ? "bg-purple-50 text-purple-700 border-purple-200"
+                                : "bg-sky-50 text-sky-700 border-sky-200"
+                            }`}>
+                              {app.type}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="px-6 py-4 text-xs text-[#768385]">
+                            {app.area}
+                          </TableCell>
+                          <TableCell className="px-6 py-4 text-xs">
+                            <Badge variant="outline" className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full capitalize ${
+                              app.status === "accepted" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                              app.status === "rejected" ? "bg-red-50 text-red-700 border-red-200" :
+                              app.status === "reviewed" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                              "bg-amber-50 text-amber-700 border-amber-200"
+                            }`}>
+                              {app.status}
+                            </Badge>
                           </TableCell>
                         </TableRow>
                       ))}

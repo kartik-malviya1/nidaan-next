@@ -100,3 +100,62 @@ export const contactSchema = z.object({
 
 export type ContactInput = z.infer<typeof contactSchema>;
 
+// Application Schema (Volunteer / Internship)
+export const applicationSchema = z.object({
+  type: z
+    .enum(["Volunteer", "Internship"], {
+      required_error: "Application type is required",
+    }),
+  name: z
+    .string()
+    .min(1, "Full Name is required")
+    .min(2, "Full Name must be at least 2 characters")
+    .max(100, "Full Name is too long")
+    .trim(),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address")
+    .trim(),
+  phone: z
+    .string()
+    .min(1, "Phone number is required")
+    .min(10, "Phone number must be at least 10 digits")
+    .max(15, "Phone number must not exceed 15 digits")
+    .regex(/^\+?[0-9\s\-]+$/, "Invalid phone number format")
+    .trim(),
+  city: z
+    .string()
+    .min(1, "City is required")
+    .max(50, "City is too long")
+    .trim(),
+  institution: z
+    .string()
+    .min(1, "Institution / Qualification is required")
+    .max(200, "Too long")
+    .trim(),
+  area: z
+    .string()
+    .min(1, "Area of interest is required")
+    .max(100, "Too long")
+    .trim(),
+  duration: z
+    .string()
+    .max(50, "Too long")
+    .optional()
+    .or(z.literal("")),
+  availability: z
+    .string()
+    .max(50, "Too long")
+    .optional()
+    .or(z.literal("")),
+  motivation: z
+    .string()
+    .min(1, "Motivation is required")
+    .min(10, "Please write at least 10 characters")
+    .max(2000, "Motivation must not exceed 2000 characters")
+    .trim(),
+});
+
+export type ApplicationInput = z.infer<typeof applicationSchema>;
+
