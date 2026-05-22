@@ -54,13 +54,15 @@ const About = () => {
 
     const coreTeam = [
         {
-            name: "P M Das",
+            name: "Mr P M Das",
             role: "Executive Director",
             sub: "Co-Founder of Nidaan",
         },
-        { name: "Rubeena", role: "Centre Coordinator", sub: "Bhopal" },
-        { name: "Suvarna Baglikar", role: "Centre Coordinator", sub: "Indore" },
-        { name: "Aswathy Anilkumar", role: "Head", sub: "Outreach Programs" },
+        { name: "Ms Rubeena", role: "Centre Coordinator", sub: "Bhopal" },
+        { name: "Ms Suvarna Baglikar", role: "Centre Coordinator", sub: "Indore" },
+        { name: "Ms Rtn. Aswathy Anilkumar", role: "Head", sub: "Outreach Programs" },
+        { name: "Mr. Samip Mohan", role: "Head", sub: "Legal Advisor" },
+        { name: "Ms. Anam Khan", role: "Head", sub: "RCI Registered Clinical Psychologist" },
     ];
 
     const partnerLogos = [
