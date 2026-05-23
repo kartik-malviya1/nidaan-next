@@ -359,10 +359,10 @@ const About = () => {
                                         <picture>
                                             <source
                                                 media="(max-width: 767px)"
-                                                srcSet="/advisoryBoard-mobile.png"
+                                                srcSet="/advisoryBoard-mobile.jpeg"
                                             />
                                             <img
-                                                src="/AdvisoryBoard.png"
+                                                src="/AdvisoryBoard.jpeg"
                                                 alt="Advisory Board Visual Chart"
                                                 className="w-full h-auto object-contain rounded-xl"
                                             />
