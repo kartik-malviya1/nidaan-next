@@ -1,247 +1,244 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
-// Sample carousel images - replace these with your actual assets
 const carouselImages = [
-  {
-    url: "/image_3.png",
-    alt: "",
-  },
-  {
-    url: "/image_4.png",
-    alt: "",
-  },
-  {
-    url: "/image_5.png",
-    alt: "",
-  },
-  {
-    url: "/image_6.png",
-    alt: "",
-  },
-  {
-    url: "/image_7.png",
-    alt: "",
-  },
-  {
-    url: "/image_1.png",
-    alt: "",
-  },
+  { url: "/image_3.png", alt: "Nidaan Institute Activity 1" },
+  { url: "/image_4.png", alt: "Nidaan Institute Activity 2" },
+  { url: "/image_2.png", alt: "Nidaan Institute Activity 3" },
+  { url: "/image_6.png", alt: "Nidaan Institute Activity 4" },
+  { url: "/image_7.png", alt: "Nidaan Institute Activity 5" },
+  { url: "/image_1.png", alt: "Nidaan Institute Activity 6" },
 ];
 
-export default function Hero() {
+export default function HeroFullScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const [direction, setDirection] = useState(0);
 
-  // Auto-play mechanism
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 6000); // Changes slide every 6 seconds
+    }, 6000);
     return () => clearInterval(timer);
   }, [currentIndex]);
 
   const handlePrev = () => {
     setDirection(-1);
     setCurrentIndex((prev) =>
-      prev === 0 ? carouselImages.length - 1 : prev - 1,
+      prev === 0 ? carouselImages.length - 1 : prev - 1
     );
   };
 
   const handleNext = () => {
     setDirection(1);
     setCurrentIndex((prev) =>
-      prev === carouselImages.length - 1 ? 0 : prev + 1,
+      prev === carouselImages.length - 1 ? 0 : prev + 1
     );
   };
 
-  // Animation variants for the sliding images
   const slideVariants = {
-    enter: (dir) => ({
+    enter: (dir: number) => ({
       x: dir > 0 ? "100%" : "-100%",
       opacity: 0,
     }),
     center: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeInOut" },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     },
-    exit: (dir) => ({
+    exit: (dir: number) => ({
       x: dir < 0 ? "100%" : "-100%",
       opacity: 0,
-      transition: { duration: 0.6, ease: "easeInOut" },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
     }),
   };
 
   return (
-    <section className="relative min-h-screen flex items-center bg-white overflow-hidden pt-28 pb-16 lg:pt-20 lg:pb-20">
-      {/* Decorative background glow elements */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FFCC00]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white rounded-full blur-3xl pointer-events-none" />
+    <section className="relative min-h-screen w-full overflow-hidden flex flex-col md:flex-row md:items-center bg-slate-950">
+      
+      {/* 1. Background Slideshow Container */}
+      {/* Mobile: Dynamic Top Half Area | Desktop: Fullscreen Cinematic Background */}
+      <div className="relative h-[40vh] w-full md:absolute md:inset-0 md:h-full md:w-full z-0">
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="absolute inset-0 w-full h-full"
+          >
+            <Image
+              src={carouselImages[currentIndex].url}
+              alt={carouselImages[currentIndex].alt || "Background Slide"}
+              fill
+              priority={currentIndex === 0}
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
 
-      <div className="container mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Mission Content */}
-          <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center items-center text-center lg:items-start lg:text-left">
+        {/* Mobile-only Bottom Shading edge inside image context */}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950 to-transparent md:hidden z-10" />
+        
+        {/* Mobile Dot Indicators nested over the graphic layout */}
+        <div className="absolute bottom-4 left-0 right-0 z-30 flex justify-center gap-2 md:hidden">
+          {carouselImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setDirection(index > currentIndex ? 1 : -1);
+                setCurrentIndex(index);
+              }}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                index === currentIndex ? "bg-[#ffcc00] w-5" : "bg-white/40 w-1.5"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* 2. Premium Multi-Layer Seamless Desktop Vignette */}
+      {/* Primary Left-to-Right structural gradient wrapper to lock in contrast beneath text */}
+      <div className="hidden md:block absolute inset-y-0 left-0 z-10 w-[60%] lg:w-[50%] bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent pointer-events-none" />
+      {/* Global secondary linear tint pass to pull the image and background together cleanly */}
+      <div className="hidden md:block absolute inset-0 z-10 bg-slate-950/15 pointer-events-none" />
+
+      {/* 3. Content Layout Structure */}
+      {/* Mobile: Standard block body positioning | Desktop: Full Overlay Surface Layer */}
+      <div className="flex-1 md:absolute md:inset-0 z-20 flex items-center bg-slate-950 md:bg-transparent">
+        <div className="container mx-auto px-5 sm:px-10 lg:px-16 xl:px-24 py-10 md:py-0">
+          <div className="max-w-xl lg:max-w-2xl text-left w-full">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="flex flex-col items-center lg:items-start"
+              className="flex flex-col items-start"
             >
               {/* Institution Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border-1 border-[#F4C400]/20 backdrop-blur-md text-slate-600 text-xs font-semibold tracking-wider uppercase mb-6 border border-white/10">
-                <span className="w-2 h-2 rounded-full bg-[#ffcc00] animate-pulse"></span>
-                Nidaan Institute of Rehabilitation & Training
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 shadow-sm backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold tracking-wider uppercase mb-4 sm:mb-5 max-w-full">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffcc00] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ffcc00]"></span>
+                </span>
+                <span className="truncate">Nidaan Institute of Rehabilitation & Training</span>
               </div>
 
-              {/* Main Heading */}
-              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold text-black leading-[1.1] mb-6">
+              {/* Main Heading - Polished & resized for crisp desktop aesthetics */}
+              <h1 className="text-2xl sm:text-4xl lg:text-4xl xl:text-5xl font-black text-white tracking-tight leading-[1.15] mb-4">
                 Where Every{" "}
-                <span className="text-[#ffcc00] block sm:inline">
-                  Potential
-                </span>{" "}
+                <span className="text-[#ffcc00]">Potential</span>{" "}
                 Unfolds
               </h1>
 
-              {/* Description Paragraph */}
-              <p className="text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0">
+              {/* Description Paragraph - Micro-adjusted desktop typography size */}
+              <p className="text-xs sm:text-base md:text-sm lg:text-base text-slate-300 font-normal leading-relaxed mb-6 sm:mb-8 max-w-lg">
                 Dedicated to promoting mental health awareness, special
                 education, rehabilitation, and inclusive care for children with
                 Autism, ADHD, Cerebral Palsy, and developmental delays.
               </p>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12 w-full sm:w-auto">
+              {/* CTA Action Deck */}
+              <div className="flex flex-col sm:flex-row items-center justify-start gap-3 mb-8 sm:mb-10 w-full sm:w-auto">
                 <Link
                   href="/services"
-                  className="h-14 w-full sm:min-w-[220px] sm:w-auto bg-[#ffcc00] hover:bg-[#e0b400] text-slate-900 font-bold inline-flex items-center justify-center gap-2 text-base px-8 transition-all duration-300 shadow-lg shadow-[#F4C400]/20"
+                  className="group h-11 w-full sm:w-auto bg-[#ffcc00] hover:bg-[#e0b400] text-slate-950 font-bold inline-flex items-center justify-center gap-2 text-xs sm:text-sm px-5 rounded-xl transition-all duration-300 shadow-md hover:translate-y-[-1px]"
                 >
                   Explore Programs
-                  <ArrowRight size={18} />
+                  <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
                 </Link>
 
                 <Link
                   href="/stories"
-                  className="h-14 w-full sm:min-w-[220px] sm:w-auto inline-flex items-center justify-center gap-3 px-6 text-black font-semibold text-sm border border-[#F4C400]/20 hover:bg-[#F4C400]/10 transition-all duration-300"
+                  className="h-11 w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-semibold inline-flex items-center justify-center gap-2 px-5 rounded-xl border border-white/5 transition-all duration-300 hover:translate-y-[-1px]"
                 >
-                  <div className="w-8 h-8 rounded-full bg-[#F4C400]/5 flex items-center justify-center border border-[#F4C400]/30">
-                    <Play
-                      size={12}
-                      fill="white"
-                      className="text-black ml-0.5"
-                    />
+                  <div className="w-5 h-5 rounded-full bg-yellow-400/10 flex items-center justify-center border border-yellow-400/20">
+                    <Play size={6} fill="currentColor" className="text-[#ffcc00] ml-0.5" />
                   </div>
-                  Watch Our Story
+                  <span className="text-xs sm:text-sm">Watch Our Story</span>
                 </Link>
               </div>
             </motion.div>
 
-            {/* Impact Stats Grid */}
+            {/* Impact Metrics Panel */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="pt-8 border-t border-white/10 grid grid-cols-3 gap-4 max-w-md w-full"
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="pt-5 border-t border-white/5 grid grid-cols-3 gap-3 sm:gap-6 w-full"
             >
               {[
                 { value: "500+", label: "Families Helped" },
                 { value: "10k+", label: "Sessions" },
                 { value: "15+", label: "Years Care" },
               ].map((stat, i) => (
-                <div key={i} className="text-center lg:text-left">
-                  <div className="text-xl sm:text-2xl font-extrabold text-[#ffcc00]">
+                <div key={i} className="text-left">
+                  <div className="text-lg sm:text-2xl md:text-xl lg:text-2xl font-black text-[#ffcc00] tracking-tight">
                     {stat.value}
                   </div>
-                  <div className="text-[10px] sm:text-xs text-black font-medium mt-1 uppercase tracking-wider">
+                  <div className="text-[8px] sm:text-[10px] text-slate-400 font-bold mt-0.5 uppercase tracking-wider leading-tight">
                     {stat.label}
                   </div>
                 </div>
               ))}
             </motion.div>
           </div>
-
-          {/* Right Column: Carousel Box */}
-          <div className="lg:col-span-6 xl:col-span-7 flex justify-center items-center relative w-full h-[320px] sm:h-[450px] lg:h-[500px]">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-              className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-slate-800"
-            >
-              {/* Image Slide Container */}
-              <div className="absolute inset-0 w-full h-full">
-                <AnimatePresence initial={false} custom={direction}>
-                  <motion.img
-                    key={currentIndex}
-                    src={carouselImages[currentIndex].url}
-                    alt={carouselImages[currentIndex].alt}
-                    custom={direction}
-                    variants={slideVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </AnimatePresence>
-                {/* Subtle overlay to soften extreme image highlights */}
-                <div className="absolute inset-0 bg-white/10" />
-              </div>
-
-              {/* Left Navigation Arrow */}
-              <button
-                onClick={handlePrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full glass text-black border border-[#FFCC00]/30 flex items-center justify-center hover:bg-[#FFCC00] transition-all"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft size={20} />
-              </button>
-
-              {/* Right Navigation Arrow */}
-              <button
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full glass text-black border border-[#FFCC00]/30 flex items-center justify-center hover:bg-[#FFCC00] transition-all"
-                aria-label="Next slide"
-              >
-                <ChevronRight size={20} />
-              </button>
-
-              {/* Bottom Dot Navigation System */}
-              <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-2">
-                {carouselImages.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setDirection(index > currentIndex ? 1 : -1);
-                      setCurrentIndex(index);
-                    }}
-                    className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex
-                      ? "bg-[#F4C400] w-6"
-                      : "bg-white/40 w-2"
-                      }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          </div>
         </div>
       </div>
 
-      {/* Downward Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:block"
+      {/* 4. Desktop Interface Navigation Shell */}
+      {/* Left Chevron Action Control */}
+      <button
+        onClick={handlePrev}
+        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-xl bg-slate-950/20 backdrop-blur-md text-white shadow-sm items-center justify-center hover:bg-[#ffcc00] hover:text-slate-950 transition-all active:scale-95 border border-white/10"
+        aria-label="Previous slide"
       >
-        <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center pt-2">
-          <div className="w-1 h-2.5 rounded-full bg-white/40"></div>
+        <ChevronLeft size={18} strokeWidth={2.5} />
+      </button>
+
+      {/* Right Chevron Action Control */}
+      <button
+        onClick={handleNext}
+        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-xl bg-slate-950/20 backdrop-blur-md text-white shadow-sm items-center justify-center hover:bg-[#ffcc00] hover:text-slate-950 transition-all active:scale-95 border border-white/10"
+        aria-label="Next slide"
+      >
+        <ChevronRight size={18} strokeWidth={2.5} />
+      </button>
+
+      {/* Desktop Dot Tracker Rails */}
+      <div className="hidden md:flex absolute bottom-8 left-0 right-0 z-30 justify-center gap-2">
+        {carouselImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setDirection(index > currentIndex ? 1 : -1);
+              setCurrentIndex(index);
+            }}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              index === currentIndex ? "bg-[#ffcc00] w-6" : "bg-white/20 hover:bg-white/50 w-1.5"
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Downward Scroll indicator vector */}
+      <motion.div
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-16 right-10 lg:right-16 z-30 hidden lg:block"
+      >
+        <div className="w-5 h-9 rounded-full border-2 border-white/10 flex items-start justify-center pt-1.5 backdrop-blur-sm">
+          <div className="w-0.5 h-1.5 rounded-full bg-white/30"></div>
         </div>
       </motion.div>
     </section>
   );
-};
-
+}

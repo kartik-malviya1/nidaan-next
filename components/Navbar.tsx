@@ -46,9 +46,9 @@ const Navbar = () => {
   ];
 
   // Dynamic Theme Colors based on active route
-  const isHomePage = location === "/";
-  const baseTextColor = isHomePage ? "text-black" : "text-white";
-  const hoverBgColor = isHomePage ? "hover:bg-black/5" : "hover:bg-white/10";
+  // const isHomePage = location === "/";
+  const baseTextColor =  "text-black" ;
+  const hoverBgColor =  "hover:bg-black/5";
 
   // Mobile menu links variants
   const menuVariants = {
@@ -75,9 +75,9 @@ const Navbar = () => {
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : "-100%" }}
       transition={{ duration: 0.4, ease: "easeInOut" }}
-      className="fixed w-full z-50 py-4 bg-transparent top-0 left-0"
+      className="fixed w-full z-50 py-2 bg-white top-0 left-0"
     >
-      <div className="px-6 lg:px-12 xl:px-24 flex justify-between items-center">
+      <div className="px-6  lg:px-12 xl:px-24 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <img

@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <Stats />
+      {/* <Stats /> */}
       <AboutSection />
       <Journey />
       <CaseStudies />
