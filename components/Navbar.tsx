@@ -38,7 +38,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
+    { name: "Our Services", path: "/services" },
     { name: "Stories", path: "/stories" },
     { name: "Gallery", path: "/gallery" },
     { name: "Contact", path: "/contact" },
@@ -46,9 +46,9 @@ const Navbar = () => {
   ];
 
   // Dynamic Theme Colors based on active route
-  // const isHomePage = location === "/";
-  const baseTextColor =  "text-black" ;
-  const hoverBgColor =  "hover:bg-black/5";
+  const isHomePage = location === "/";
+  const baseTextColor = isHomePage ? "text-black" : "text-white";
+  const hoverBgColor = isHomePage ? "hover:bg-black/5" : "hover:bg-white/10";
 
   // Mobile menu links variants
   const menuVariants = {
