@@ -20,7 +20,7 @@ export default function Home() {
       <Stats />
       <AboutSection />
       <Journey />
-      <CaseStudies />
+      {/* <CaseStudies /> */}
       <ProgramsSection />
       <WhyNidaan />
       <ImpactSection />

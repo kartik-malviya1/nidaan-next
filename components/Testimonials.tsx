@@ -113,8 +113,8 @@ const Testimonials = () => {
 
       <div className="w-full max-w-6xl mx-auto px-4 lg:px-8 flex flex-col items-center">
         {/* --- Header: Title Layout --- */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-6 mb-12 relative z-10">
-          <div className="text-center sm:text-center mx-auto font-serif">
+        <div className="w-full flex flex-col sm:flex-row mx-auto items-center justify-between gap-6 mb-12 relative z-10">
+          <div className="text-center sm:text-center font-serif mx-auto sm:mx-[30%] ">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-widest leading-tight block">
               PARENT
             </h2>
