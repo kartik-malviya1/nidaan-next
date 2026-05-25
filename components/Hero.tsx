@@ -125,7 +125,7 @@ export default function Hero() {
                 </Link>
 
                 <Link
-                  href="/contact"
+                  href="/stories"
                   className="h-14 w-full sm:min-w-[220px] sm:w-auto inline-flex items-center justify-center gap-3 px-6 text-black font-semibold text-sm border border-[#F4C400]/20 hover:bg-[#F4C400]/10 transition-all duration-300"
                 >
                   <div className="w-8 h-8 rounded-full bg-[#F4C400]/5 flex items-center justify-center border border-[#F4C400]/30">

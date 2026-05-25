@@ -31,7 +31,7 @@ const About = () => {
             desc: "RCI Registered Special Educator & Trainer",
         },
         { name: "Ms. Sindhu Nair", role: "Treasurer", desc: "Teacher" },
-        { name: "Mr. Bahul Shatsri", role: "Joint Secretary", desc: "Advocate" },
+        { name: "Mr. Bahul Shastri", role: "Joint Secretary", desc: "Advocate" },
         { name: "Ms. Bina Prakash", role: "Member", desc: "Teacher & Trainer" },
         {
             name: "Mr. Dharmendra Kr. Ray",
@@ -55,13 +55,13 @@ const About = () => {
 
     const coreTeam = [
         {
-            name: "Mr P M Das",
+            name: "Mr. P M Das",
             role: "Executive Director",
             sub: "Co-Founder of Nidaan",
         },
-        { name: "Ms Rubeena", role: "Centre Coordinator", sub: "Bhopal" },
-        { name: "Ms Suvarna Baglikar", role: "Centre Coordinator", sub: "Indore" },
-        { name: "Ms Rtn. Aswathy Anilkumar", role: "Head", sub: "Outreach Programs" },
+        { name: "Ms. Rubeena", role: "Centre Coordinator", sub: "Bhopal" },
+        { name: "Ms. Suvarna Baglikar", role: "Centre Coordinator", sub: "Indore" },
+        { name: "Ms. Rtn. Aswathy Anilkumar", role: "Head", sub: "Outreach Programs" },
         { name: "Mr. Samip Mohan", role: "Head", sub: "Legal Advisor" },
         { name: "Ms. Anam Khan", role: "Head", sub: "RCI Registered Clinical Psychologist" },
     ];
