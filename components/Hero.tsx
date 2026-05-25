@@ -58,7 +58,7 @@ export default function HeroFullScreen() {
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden flex flex-col md:flex-row md:items-center bg-slate-950">
+    <section className="relative min-h-screen w-full overflow-hidden flex flex-col md:flex-row md:items-center bg-black">
       
       {/* 1. Background Slideshow Container */}
       {/* Mobile: Dynamic Top Half Area | Desktop: Fullscreen Cinematic Background */}
@@ -85,7 +85,7 @@ export default function HeroFullScreen() {
         </AnimatePresence>
 
         {/* Mobile-only Bottom Shading edge inside image context */}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950 to-transparent md:hidden z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent md:hidden z-10" />
         
         {/* Mobile Dot Indicators nested over the graphic layout */}
         <div className="absolute bottom-4 left-0 right-0 z-30 flex justify-center gap-2 md:hidden">
@@ -107,13 +107,13 @@ export default function HeroFullScreen() {
 
       {/* 2. Premium Multi-Layer Seamless Desktop Vignette */}
       {/* Primary Left-to-Right structural gradient wrapper to lock in contrast beneath text */}
-      <div className="hidden md:block absolute inset-y-0 left-0 z-10 w-[60%] lg:w-[50%] bg-gradient-to-r from-slate-950 via-slate-950/85 to-transparent pointer-events-none" />
+      <div className="hidden md:block absolute inset-y-0 left-0 z-10 w-[60%] lg:w-[80%] bg-gradient-to-r from-black/85 via-black/70 to-transparent pointer-events-none" />
       {/* Global secondary linear tint pass to pull the image and background together cleanly */}
-      <div className="hidden md:block absolute inset-0 z-10 bg-slate-950/15 pointer-events-none" />
+      <div className="hidden md:block absolute inset-0 z-10 bg-black/15 pointer-events-none" />
 
       {/* 3. Content Layout Structure */}
       {/* Mobile: Standard block body positioning | Desktop: Full Overlay Surface Layer */}
-      <div className="flex-1 md:absolute md:inset-0 z-20 flex items-center bg-slate-950 md:bg-transparent">
+      <div className="flex-1 md:absolute md:inset-0 z-20 flex items-center bg-black md:bg-transparent">
         <div className="container mx-auto px-5 sm:px-10 lg:px-16 xl:px-24 py-10 md:py-0">
           <div className="max-w-xl lg:max-w-2xl text-left w-full">
             <motion.div
@@ -157,7 +157,7 @@ export default function HeroFullScreen() {
 
                 <Link
                   href="/stories"
-                  className="h-11 w-full sm:w-auto bg-slate-900 hover:bg-slate-800 text-white font-semibold inline-flex items-center justify-center gap-2 px-5 rounded-xl border border-white/5 transition-all duration-300 hover:translate-y-[-1px]"
+                  className="h-11 w-full sm:w-auto outline-[#ffcc00] hover:bg-black text-white font-semibold inline-flex items-center justify-center gap-2 px-5 rounded-xl border border-white/5 transition-all duration-300 hover:translate-y-[-1px]"
                 >
                   <div className="w-5 h-5 rounded-full bg-yellow-400/10 flex items-center justify-center border border-yellow-400/20">
                     <Play size={6} fill="currentColor" className="text-[#ffcc00] ml-0.5" />
