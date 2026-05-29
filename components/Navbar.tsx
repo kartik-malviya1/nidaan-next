@@ -47,8 +47,8 @@ const Navbar = () => {
 
   // Dynamic Theme Colors based on active route
   const isHomePage = location === "/";
-  const baseTextColor = isHomePage ? "text-black" : "text-white";
-  const hoverBgColor = isHomePage ? "hover:bg-black/5" : "hover:bg-white/10";
+  const baseTextColor =  "text-black" ;
+  const hoverBgColor = "hover:bg-black/5";
 
   // Mobile menu links variants
   const menuVariants = {
@@ -138,10 +138,7 @@ const Navbar = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={`lg:hidden w-full backdrop-blur-lg border-t overflow-hidden absolute left-0 top-full shadow-lg ${isHomePage
-              ? "bg-white/95 border-black/10"
-              : "bg-black/90 border-white/10"
-              }`}
+            className={`lg:hidden w-full backdrop-blur-lg border-t overflow-hidden absolute left-0 top-full shadow-lg bg-white/95 border-black/10`}
           >
             <div className="flex flex-col p-5 gap-1">
               {navLinks.map((link) => (

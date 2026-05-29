@@ -1,9 +1,20 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { Award, CheckCircle, Users, Shield, ArrowRight } from "lucide-react";
+import { Award, CheckCircle, Users, Shield, ArrowRight, FileText, Download, ExternalLink } from "lucide-react";
 
 const Stories = () => {
+    const reports = [
+        { year: "2017 - 2018", type: "PDF", url: "/NIDAAN ANNUAL REPORT 2017-2018.pdf", isLocal: true },
+        { year: "2018 - 2019", type: "PDF", url: "/NIDAAN ANNUAL REPORT 2018-2019.pdf", isLocal: true },
+        { year: "2019 - 2020", type: "Drive Link", url: "https://drive.google.com/file/d/1ii2EmNO4YcWEXFaxKnu9xuKCaDrL9lze/view?usp=drive_web", isLocal: false },
+        { year: "2020 - 2021", type: "Drive Link", url: "https://drive.google.com/file/d/1ebARO4TKvQRtgr2DoDRZMN32aWkyJyoB/view?usp=drive_web", isLocal: false },
+        { year: "2021 - 2022", type: "Drive Link", url: "https://drive.google.com/file/d/1cX0ETYGLBmuA-AZzDD6GeeKLGzUKaj28/view?usp=drive_web", isLocal: false },
+        { year: "2022 - 2023", type: "Drive Link", url: "https://drive.google.com/file/d/13Zz8VDu8eM5u7nx7_rCIHjZLRVZnRRpC/view?usp=drive_web", isLocal: false },
+        { year: "2023 - 2024", type: "Drive Link", url: "https://drive.google.com/file/d/1MWfzJBZPVpy7NC4N8EKvGPkasZbgE26x/view?usp=drive_web", isLocal: false },
+        { year: "2024 - 2025", type: "Drive Link", url: "https://drive.google.com/file/d/1GbVEoY3YtIKrKSogOzr69hJu7JmLVwa9/view?usp=drive_web", isLocal: false }
+    ];
+
     return (
         <div>
             {/* Hero */}
@@ -206,17 +217,54 @@ const Stories = () => {
                         ))}
                     </div>
 
-                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-10 border border-white/10 text-center max-w-2xl mx-auto">
-                        <h3 className="text-xl font-bold text-white mb-4">
-                            Annual Reports & Resources
-                        </h3>
-                        <p className="text-white/40 text-sm mb-8">
-                            Our reports provide insights into organizational achievements,
-                            outreach programs, and success stories.
-                        </p>
-                        <button className="btn-primary w-full sm:w-auto">
-                            View Annual Reports
-                        </button>
+                    <div className="max-w-6xl mx-auto">
+                        <div className="text-center mb-10">
+                            <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3">
+                                Annual Reports & Governance
+                            </h3>
+                            <p className="text-white/60 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+                                We are committed to absolute transparency and accountability in our mission. Access our annual reports by year to review our program milestones, financial disclosures, and impact assessments.
+                            </p>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-left">
+                            {reports.map((report, i) => (
+                                <motion.a
+                                    key={i}
+                                    href={report.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    initial={{ opacity: 0, y: 15 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.05, duration: 0.3 }}
+                                    className="group relative overflow-hidden bg-white/5 backdrop-blur-sm rounded-2xl p-5 border border-white/10 hover:border-[#FFCC00]/50 hover:bg-white/10 transition-all duration-300 flex flex-col justify-between h-40 shadow-sm hover:shadow-lg hover:shadow-[#FFCC00]/5"
+                                >
+                                    <div className="flex justify-between items-start">
+                                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-[#FFCC00] group-hover:bg-[#FFCC00]/20 transition-colors">
+                                            <FileText size={20} />
+                                        </div>
+                                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                                            report.isLocal 
+                                                ? "bg-amber-500/20 text-amber-300 border border-amber-500/30" 
+                                                : "bg-[#FFCC00]/20 text-[#FFCC00] border border-[#FFCC00]/30"
+                                        }`}>
+                                            {report.type}
+                                        </span>
+                                    </div>
+                                    
+                                    <div className="mt-4">
+                                        <h4 className="text-white font-display font-extrabold text-base leading-tight group-hover:text-[#FFCC00] transition-colors">
+                                            {report.year}
+                                        </h4>
+                                        <div className="flex items-center gap-1 text-white/40 group-hover:text-white/80 transition-colors mt-2 text-xs font-semibold">
+                                            <span>{report.isLocal ? "Download PDF" : "View on Drive"}</span>
+                                            {report.isLocal ? <Download size={12} /> : <ExternalLink size={12} />}
+                                        </div>
+                                    </div>
+                                </motion.a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
