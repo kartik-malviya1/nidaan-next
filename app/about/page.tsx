@@ -479,8 +479,8 @@ const About = () => {
                 </div>
             </section>
 
-            {/* Annual Report */}
-            {/* <section className="section-padding bg-white border-t border-amber-100/40">
+            {/* Annual Report - NOW UNCOMMENTED */}
+            <section className="section-padding bg-white border-t border-amber-100/40">
                 <div className="section-container">
                     <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 to-amber-100/30 rounded-2xl p-8 md:p-10 border border-amber-100 shadow-sm">
                         <div className="absolute top-0 right-0 w-80 h-80 bg-amber-200/20 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
@@ -492,7 +492,7 @@ const About = () => {
                                     <FileText size={14} className="text-[#de5212]" />
                                     Transparency & Governance
                                 </span>
-                                <h2 className="text-2xl font-display font-bold text-[#144047] mb-3">
+                                <h2 className="text-2xl font-display font-bold text-black mb-3">
                                     NIDAAN Annual Report
                                 </h2>
                                 <p className="text-slate-600 leading-relaxed text-sm">
@@ -500,19 +500,17 @@ const About = () => {
                                 </p>
                             </div>
                             <div className="flex justify-center md:justify-end shrink-0">
-                                <a
-                                    href="https://drive.google.com/drive/folders/1Bv9Jc71C4g9sE40LzT_aP9p-uVj9sV_B"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn-primary gap-2 rounded-xl text-center w-full sm:w-auto"
+                                <Link
+                                    href="/annual-reports"
+                                    className="btn-primary gap-2 text-center w-full sm:w-auto"
                                 >
-                                    Access Annual Report <ExternalLink size={16} />
-                                </a>
+                                    Annual Report <ExternalLink size={16} />
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section> */}
+            </section>
 
             {/* CTA */}
             <section className="section-padding bg-white">
