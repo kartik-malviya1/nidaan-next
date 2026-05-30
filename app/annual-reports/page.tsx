@@ -185,8 +185,8 @@ export default function AnnualReports() {
                       <div className="aspect-[3/2] overflow-hidden relative">
                         <img src={report.coverUrl} alt={report.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/10 transition-colors" />
-                        <div className="absolute top-3 left-3">
-                          <span className="bg-slate-900/90 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                        <div className="absolute top-3 right-3">
+                          <span className="bg-amber-500 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-full">
                             {report.year}
                           </span>
                         </div>
