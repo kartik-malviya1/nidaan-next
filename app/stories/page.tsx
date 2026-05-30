@@ -5,6 +5,17 @@ import { Award, CheckCircle, Users, Shield, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const Stories = () => {
+    const reports = [
+        { year: "2017 - 2018", type: "PDF", url: "/NIDAAN ANNUAL REPORT 2017-2018.pdf", isLocal: true },
+        { year: "2018 - 2019", type: "PDF", url: "/NIDAAN ANNUAL REPORT 2018-2019.pdf", isLocal: true },
+        { year: "2019 - 2020", type: "Drive Link", url: "https://drive.google.com/file/d/1ii2EmNO4YcWEXFaxKnu9xuKCaDrL9lze/view?usp=drive_web", isLocal: false },
+        { year: "2020 - 2021", type: "Drive Link", url: "https://drive.google.com/file/d/1ebARO4TKvQRtgr2DoDRZMN32aWkyJyoB/view?usp=drive_web", isLocal: false },
+        { year: "2021 - 2022", type: "Drive Link", url: "https://drive.google.com/file/d/1cX0ETYGLBmuA-AZzDD6GeeKLGzUKaj28/view?usp=drive_web", isLocal: false },
+        { year: "2022 - 2023", type: "Drive Link", url: "https://drive.google.com/file/d/13Zz8VDu8eM5u7nx7_rCIHjZLRVZnRRpC/view?usp=drive_web", isLocal: false },
+        { year: "2023 - 2024", type: "Drive Link", url: "https://drive.google.com/file/d/1MWfzJBZPVpy7NC4N8EKvGPkasZbgE26x/view?usp=drive_web", isLocal: false },
+        { year: "2024 - 2025", type: "Drive Link", url: "https://drive.google.com/file/d/1GbVEoY3YtIKrKSogOzr69hJu7JmLVwa9/view?usp=drive_web", isLocal: false }
+    ];
+
     return (
         <div>
             {/* Hero */}

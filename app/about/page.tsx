@@ -10,6 +10,8 @@ import {
     ArrowRight,
     LayoutGrid,
     Image as ImageIcon,
+    FileText,
+    ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -476,6 +478,41 @@ const About = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Annual Report */}
+            {/* <section className="section-padding bg-white border-t border-amber-100/40">
+                <div className="section-container">
+                    <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 to-amber-100/30 rounded-2xl p-8 md:p-10 border border-amber-100 shadow-sm">
+                        <div className="absolute top-0 right-0 w-80 h-80 bg-amber-200/20 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#F90D41]/5 rounded-full blur-3xl -ml-32 -mb-32 pointer-events-none" />
+
+                        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                            <div className="max-w-2xl text-center md:text-left">
+                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 mb-4 font-sans">
+                                    <FileText size={14} className="text-[#de5212]" />
+                                    Transparency & Governance
+                                </span>
+                                <h2 className="text-2xl font-display font-bold text-[#144047] mb-3">
+                                    NIDAAN Annual Report
+                                </h2>
+                                <p className="text-slate-600 leading-relaxed text-sm">
+                                    We are committed to absolute transparency and accountability in our mission. Access our annual reports on Google Drive to review our program milestones, financial disclosures, and impact assessments.
+                                </p>
+                            </div>
+                            <div className="flex justify-center md:justify-end shrink-0">
+                                <a
+                                    href="https://drive.google.com/drive/folders/1Bv9Jc71C4g9sE40LzT_aP9p-uVj9sV_B"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn-primary gap-2 rounded-xl text-center w-full sm:w-auto"
+                                >
+                                    Access Annual Report <ExternalLink size={16} />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> */}
 
             {/* CTA */}
             <section className="section-padding bg-white">
