@@ -9,8 +9,8 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
@@ -55,7 +55,7 @@ model Contact {
 
 model Application {
   id           String   @id @default(uuid())
-  type         String   // "Volunteer" or "Internship"
+  type         String // "Volunteer" or "Internship"
   name         String
   email        String
   phone        String
@@ -68,4 +68,17 @@ model Application {
   status       String   @default("pending") // pending, reviewed, accepted, rejected
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+model AnnualReport {
+  id         String  @id @default(uuid())
+  year       String  @unique
+  title      String
+  highlights Json
+  coverUrl   String
+  pdfUrl     String
+  featured   Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

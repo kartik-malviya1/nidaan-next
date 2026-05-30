@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Award, CheckCircle, Users, Shield, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const Stories = () => {
     return (
@@ -214,9 +215,12 @@ const Stories = () => {
                             Our reports provide insights into organizational achievements,
                             outreach programs, and success stories.
                         </p>
-                        <button className="btn-primary w-full sm:w-auto">
+                        <Link
+                            href="/annual-reports"
+                            className="btn-primary w-full sm:w-auto"
+                        >
                             View Annual Reports
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>

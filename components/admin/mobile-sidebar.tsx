@@ -12,6 +12,7 @@ import {
   Mail,
   Users,
   Sparkles,
+  FileText,
 } from "lucide-react";
 
 interface MobileSidebarProps {
@@ -44,6 +45,11 @@ const navItems = [
     name: "Applications",
     href: "/admin/applications",
     icon: Users,
+  },
+  {
+    name: "Annual Reports",
+    href: "/admin/annual-reports",
+    icon: FileText,
   },
 ];
 

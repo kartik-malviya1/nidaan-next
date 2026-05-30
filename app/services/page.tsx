@@ -65,7 +65,6 @@ const Services = () => {
     }
   ];
 
-  // Helper to remove citation brackets visually
 
   return (
     <div>

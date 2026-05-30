@@ -63,7 +63,7 @@ export default function Home() {
                   <ArrowRight size={18} />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/get-involved"
                   className="btn-white w-full sm:w-auto gap-2 text-base px-8 py-3.5"
                 >
                   Become a Volunteer

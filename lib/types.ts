@@ -13,6 +13,18 @@ export interface GalleryImage {
   updatedAt: string;
 }
 
+export interface AnnualReport {
+  id: string;
+  year: string;
+  title: string;
+  highlights: string[];
+  coverUrl: string;
+  pdfUrl: string;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Donation {
   id: string;
   name: string;
