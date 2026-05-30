@@ -104,7 +104,7 @@ export default function VolunteerInternship() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="max-w-3xl mx-auto text-center"
+                        className="max-w-3xl text-left"
                     >
                         <span className="text-xs font-semibold tracking-widest uppercase text-amber-400 mb-4 block">
                             Support Our Cause
@@ -113,10 +113,10 @@ export default function VolunteerInternship() {
                         <h1 className="text-3xl lg:text-5xl font-display font-extrabold text-white mb-2 leading-tight">
                             Volunteer & Internship
                             <br />
-                            at NIDAAN
+                            at <span></span><span className="text-amber-500">NIDAAN</span>
                         </h1>
 
-                        <p className="text-lg text-white/70 text-center max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-lg text-white/70 text-left leading-relaxed">
                             Join NIDAAN to empower children with special needs while gaining hands-on experience in therapy, education, rehabilitation, and outreach.
                         </p>
 

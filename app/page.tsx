@@ -56,7 +56,7 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Link
-                  href="/contact"
+                  href="/donate"
                   className="btn-primary w-full sm:w-auto gap-2 text-base px-8 py-3.5"
                 >
                   Donate Now
