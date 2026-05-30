@@ -105,7 +105,7 @@ const Navbar = () => {
 
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
-          <Link href="/contact" className="btn-primary gap-2">
+          <Link href="/donate" className="btn-primary gap-2">
             Donate Now <ArrowRight size={16} />
           </Link>
         </div>

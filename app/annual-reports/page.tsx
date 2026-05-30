@@ -111,7 +111,7 @@ export default function AnnualReports() {
                   <div className="relative min-h-[300px] lg:min-h-[420px]">
                     <img src={featured.coverUrl} alt={featured.title} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/60" />
-                    <div className="absolute top-5 left-5">
+                    <div className="absolute top-3 right-5">
                       <span className="bg-amber-500 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
                         Latest Report
                       </span>
