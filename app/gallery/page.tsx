@@ -252,7 +252,7 @@ const Gallery = () => {
                                     ))}
                                 </div>
                                 <Link
-                                    href="/contact"
+                                    href="/get-involved"
                                     className="btn-primary w-full sm:w-auto gap-2"
                                 >
                                     Apply for Internship <ArrowRight size={16} />
