@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, ContactInput } from "@/lib/validations";
+import Link from "next/link";
 import {
     MapPin,
     Phone,
@@ -295,85 +296,37 @@ const Contact = () => {
                                     </button>
                                 </form>
                             </div>
+                            {/* Donation CTA */}
+            <section className=" bg-amber-50">
+                <div className="section-container">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="bg-white rounded-3xl p-8 lg:p-12 border border-amber-100 shadow-xl shadow-amber-50/50 text-center max-w-8xl mx-auto flex flex-col items-center"
+                    >
+                        <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 mb-6">
+                            <HeartHandshake size={32} />
                         </div>
-                    </div>
+                        <span className="text-xs font-semibold tracking-widest uppercase text-amber-600 mb-3 block">
+                            Support Our Cause
+                        </span>
+                        <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-4 leading-tight">
+                            Your Support Creates Possibilities
+                        </h2>
+                        <p className="text-gray-600 leading-relaxed mb-8 max-w-lg mx-auto">
+                            Every contribution helps provide therapy support, educational
+                            services, and inclusive opportunities for children and families. 
+                        </p>
+                        <Link 
+                            href="/donate"
+                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-black text-white font-semibold rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                        >
+                            <Heart size={18} /> Make a Donation <ArrowRight size={18} className="ml-1" />
+                        </Link>
+                    </motion.div>
                 </div>
             </section>
-
-            {/* Donation */}
-            <section className="section-padding bg-amber-50">
-                <div className="section-container">
-                    <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div className="text-center lg:text-left">
-                            <span className="text-xs font-semibold tracking-widest uppercase text-amber-600 mb-4 block">
-                                Support
-                            </span>
-                            <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-6 leading-tight">
-                                Your Support Creates Possibilities
-                            </h2>
-                            <p className="text-gray-600 leading-relaxed mb-8">
-                                Every contribution helps provide therapy support, educational
-                                services, and inclusive opportunities for children and families.
-                            </p>
-                            <div className="flex items-center gap-4 p-5 bg-amber-50 rounded-xl border border-amber-100 text-left">
-                                <HeartHandshake className="text-amber-600 shrink-0" size={28} />
-                                <div>
-                                    <h4 className="font-bold text-black text-sm mb-0.5">
-                                        Meaningful Impact
-                                    </h4>
-                                    <p className="text-xs text-gray-500">
-                                        Promoting dignity, independence, and confidence through your
-                                        generosity.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                {[
-                                    {
-                                        amount: "₹500",
-                                        label: "Therapy Session",
-                                        desc: "Direct support for one child.",
-                                    },
-                                    {
-                                        amount: "₹1500",
-                                        label: "Learning Materials",
-                                        desc: "Books and sensory kits.",
-                                    },
-                                    {
-                                        amount: "₹5000",
-                                        label: "Child Sponsorship",
-                                        desc: "Holistic monthly support.",
-                                    },
-                                    {
-                                        amount: "Custom",
-                                        label: "Any Amount",
-                                        desc: "Every bit counts.",
-                                    },
-                                ].map((card, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, y: 15 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.08 }}
-                                        className="p-6 rounded-xl bg-white border border-amber-100 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-50 transition-all duration-300 cursor-pointer group"
-                                    >
-                                        <div className="text-2xl font-display font-extrabold text-[#ffcc00] mb-1 group-hover:text-amber-600 transition-colors">
-                                            {card.amount}
-                                        </div>
-                                        <p className="font-semibold text-slate-900 text-sm mb-1">
-                                            {card.label}
-                                        </p>
-                                        <p className="text-xs text-slate-400">{card.desc}</p>
-                                    </motion.div>
-                                ))}
-                            </div>
-                            <button className="w-full mt-4 py-3.5 bg-black text-white font-semibold rounded-xl hover:bg-black transition-colors flex items-center justify-center gap-2">
-                                <Heart size={16} /> Donate Now
-                            </button>
                         </div>
                     </div>
                 </div>
