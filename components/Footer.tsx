@@ -68,7 +68,7 @@ const Footer = () => {
                 },
                  {
                   icon: <YoutubeIcon />,
-                  href: "https://youtube.com",
+                  href: "https://www.youtube.com/@nidaannirt",
                 },
               ].map((social, i) => (
                 <a
