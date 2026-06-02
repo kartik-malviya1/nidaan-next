@@ -193,7 +193,7 @@ export default function AnnualReports() {
                       </div>
 
                       {/* Info */}
-                      <div className="p-4 md:p-5">
+                      <div className="p-4 md:p-4">
                         <div className="flex items-start gap-2.5 mb-2">
                           <FileText className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                           <div>
@@ -203,12 +203,12 @@ export default function AnnualReports() {
                       </div>
                     </div>
 
-                    <div className="p-4 md:p-5 pt-0 mt-auto">
+                    <div className="p-4 md:p-4 lg:-mt-4 pt-0 mt-auto border-t">
                       <a 
                         href={report.pdfUrl} 
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between gap-1.5 text-xs font-semibold text-slate-600 hover:text-amber-600 transition-colors group/link w-full border-t border-slate-100 pt-3"
+                        className="flex items-center justify-between gap-1.5 text-xs font-semibold text-slate-600 hover:text-amber-600 transition-colors group/link w-full border-slate-100"
                       >
                         <span>View online</span>
                         <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover/link:text-amber-500 transition-colors" />
