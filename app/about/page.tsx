@@ -349,10 +349,10 @@ const About = () => {
                                         <picture>
                                             <source
                                                 media="(max-width: 767px)"
-                                                srcSet="/Founder-Mobile.png"
+                                                srcSet="/founder-m.jpeg"
                                             />
                                             <img
-                                                src="/Founder.png"
+                                                src="/founder-1.jpeg"
                                                 alt="Office Bearers Visual Chart"
                                                 className="w-full h-auto object-contain rounded-xl"
                                             />
