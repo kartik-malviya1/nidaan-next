@@ -201,15 +201,15 @@ export default function DonatePage() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-zinc-500">Account No.</span>
-                    <span className="font-semibold text-black">XXXX XXXX XXXX</span>
+                    <span className="font-semibold text-black">10073835601</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-zinc-500">IFSC Code</span>
-                    <span className="font-semibold text-black">XXXX0000000</span>
+                    <span className="font-semibold text-black">IDFB00041386</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-zinc-500">Bank</span>
-                    <span className="font-semibold text-black">State Bank of India</span>
+                    <span className="font-semibold text-black">IDFC First Bank, Kolar Road Branch</span>
                   </div>
                 </div>
               </div>
