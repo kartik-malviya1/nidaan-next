@@ -6,12 +6,12 @@ const FloatingSocials = () => {
   const socials = [
     {
       icon: <FaFacebookF size={20} />,
-      url: "https://facebook.com",
+      url: "https://www.facebook.com/NidaanNIRT/",
       hoverColor: "text-[#1877f2]",
     },
     {
       icon: <FaInstagram size={22} />, // Slightly larger to match Facebook's visual weight
-      url: "https://instagram.com",
+      url: "https://www.instagram.com/nidaannirt/",
       hoverColor: "text-[#e4405f]",
     },
   ];
