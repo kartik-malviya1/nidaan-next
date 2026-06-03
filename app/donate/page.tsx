@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { QrCode, Heart, IndianRupee, FileCheck, Download, ExternalLink, FileText, FileSignature, HandCoins, BarChart3, TrendingUp, Users, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 // Placeholders for external definitions
-const QR_PLACEHOLDER = '/donation.png'; 
+const QR_PLACEHOLDER = '/QR-Code.jpeg'; 
 const HERO_IMAGE_PATH = '/image_18.png'; 
 const PRESET_AMOUNTS = [500, 1000, 2500, 5000, 10000];
 
@@ -181,7 +181,7 @@ export default function DonatePage() {
                 </div>
                 <div className="bg-white rounded-2xl p-4 shadow-md border border-zinc-100">
                   {/* Actual QR code image placeholder */}
-                  <div className="w-88 h-88 flex items-center justify-center rounded-xl overflow-hidden">
+                  <div className="w-98 h-98 flex items-center justify-center rounded-xl overflow-hidden">
                     <img
                       src={QR_PLACEHOLDER}
                       alt="UPI QR Code"
@@ -191,7 +191,7 @@ export default function DonatePage() {
                 </div>
                 <div className="text-center">
                   <div className="text-xs text-zinc-400 mb-1 font-medium">UPI ID</div>
-                  <div className="text-base font-bold tracking-wide text-black">nidaan@upi</div>
+                  <div className="text-base font-bold tracking-wide text-black">pmohandas@ibl</div>
                 </div>
                 {/* Bank Details */}
                 <div className="w-full border-t border-zinc-200 pt-5 space-y-2">
