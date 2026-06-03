@@ -197,13 +197,13 @@ export default function AnnualReports() {
                         <div className="flex items-start gap-2.5 mb-2">
                           <FileText className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                           <div>
-                            <div className="text-sm font-bold leading-snug line-clamp-2 text-slate-900">{report.title}</div>
+                            <div className="text-sm font-bold leading-snug line-clamp-2 text-slate-900 lg:mb-1.5">{report.title}</div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-4 md:p-4 lg:-mt-4 pt-0 mt-auto border-t">
+                    <div className="p-4 md:p-4 lg:-mt-4 border-t mt-auto">
                       <a 
                         href={report.pdfUrl} 
                         target="_blank"
