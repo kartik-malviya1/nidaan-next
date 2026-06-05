@@ -1,6 +1,5 @@
-import React from 'react'
 import { motion } from 'framer-motion'
-import { Shield, Brain, Activity, Users, Heart, Zap } from 'lucide-react'
+import { Shield, Brain, Activity, Users, Heart, Zap,HeartHandshake, Eye, ArrowRight } from 'lucide-react'
 
 const WhyNidaan = () => {
   const values = [
@@ -40,6 +39,18 @@ const WhyNidaan = () => {
       icon: <Brain size={24} />,
       color: 'bg-cyan-50 text-cyan-600',
     },
+    {
+      title: 'Transparency',
+      desc: 'CWe maintain openness, trust, and clear communication in all our relationships and processes.  ',
+      icon: <Eye size={24} />,
+      color: 'bg-sky-50 text-sky-600',
+    },
+    {
+      title:  'Dedication',
+      desc: 'We remain fully committed to nurturing and empowering every child to realize their full potential.',
+      icon: <HeartHandshake size={24} />,
+      color: 'bg-rose-50 text-rose-600',
+    },
   ]
 
   return (
@@ -70,6 +81,29 @@ const WhyNidaan = () => {
               <p className="text-sm text-gray-500 leading-relaxed">{val.desc}</p>
             </motion.div>
           ))}
+          {/* 9th "Learn More" CTA Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: values.length * 0.08 }}
+            className="p-8 rounded-2xl bg-gradient-to-br from-amber-50/50 to-rose-50/50 border border-dashed border-amber-200 flex flex-col justify-between items-start group hover:border-solid hover:border-[#F90D41]/30 hover:shadow-lg transition-all duration-400"
+          >
+            <div>
+              <h3 className="text-xl font-bold text-black mb-3 mt-2">Want to learn more about our mission?</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">
+                Discover the story behind Nidaan, our dedicated team, and how we implement these values daily.
+              </p>
+            </div>
+            
+            <a 
+              href="/about" 
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#F90D41] group-hover:translate-x-1 transition-transform duration-300"
+            >
+              About Nidaan
+              <ArrowRight size={16} />
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>
