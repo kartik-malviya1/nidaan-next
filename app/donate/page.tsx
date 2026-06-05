@@ -197,7 +197,7 @@ export default function DonatePage() {
                 <div className="w-full border-t border-zinc-200 pt-5 space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-zinc-500">Account Name</span>
-                    <span className="font-semibold text-black">NIDAAN Society</span>
+                    <span className="font-semibold text-black">Nidaan Sewa Samiti</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-zinc-500">Account No.</span>
