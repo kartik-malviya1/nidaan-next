@@ -26,7 +26,7 @@ const Services = () => {
       title: "Therapeutic Services",
       description:
         "Our therapeutic interventions are designed to enhance functional abilities, communication skills, sensory processing, and overall quality of life.",
-      image: "/therapy2.png",
+      image: "/Therapeutic services.png",
       details: [
         { label: "Speech Therapy", desc: "Supports the development of speech, language, communication, and social interaction skills."},
         { label: "Occupational Therapy ", desc: "Focuses on improving sensory processing, motor coordination, cognitive abilities, and daily living skills." },
@@ -40,7 +40,7 @@ const Services = () => {
       title: "Psychological Services",
       description:
         "We offer evidence-based psychological interventions aimed at supporting emotional well-being, behavioral development, and adaptive functioning.",
-      image: "/therapy3.png",
+      image: "/psychological-services.png",
       details: [
         { label: "Psychometric Assessments", desc: "Comprehensive evaluations to understand cognitive, developmental, and behavioral profiles." },
         { label: "ABA Therapy ", desc: "Structured behavioral interventions designed to enhance communication, learning, and adaptive skills." },
@@ -53,7 +53,7 @@ const Services = () => {
       title: "Enrichment & Recreational Activities",
       description:
         "Our enrichment programs are designed to foster creativity, confidence, social engagement, and overall holistic development.",
-      image: "/therapy4.png",
+      image: "/Enrichment and recreational.png",
       details: [
         { label: "Pre-Vocational Training", desc: "Foundational skill-building activities that prepare individuals for vocational readiness and independent living." },
         { label: "Music, Dance & Theatre", desc: "Creative expression platforms that build confidence, enhance communication, and encourage teamwork." },
@@ -64,7 +64,6 @@ const Services = () => {
       ]
     }
   ];
-
 
   return (
     <div>
@@ -125,11 +124,13 @@ const Services = () => {
                       {service.description}
                     </p>
 
-                    <div className="w-full h-64 md:h-80 lg:h-72 rounded-2xl overflow-hidden shadow-md">
+                    {/* CHANGED: Removed fixed heights, let the image scale naturally */}
+                    <div className="w-full rounded-2xl overflow-hidden shadow-md">
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                        // CHANGED: Changed `h-full object-cover` to `h-auto`
+                        className="w-full h-auto transition-transform duration-700 hover:scale-105"
                       />
                     </div>
                   </div>
