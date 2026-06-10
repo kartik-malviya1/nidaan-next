@@ -16,6 +16,22 @@ const Gallery = () => {
     const [filter, setFilter] = useState("All");
     const [images, setImages] = useState<GalleryImage[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const galleryImages = [
+        "/training-1.png",
+        "/training-2.png",
+        "/training-3.png",
+        "/training-4.png",
+        "/training-5.png",
+    ];
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % galleryImages.length);
+        }, 4000); // Changes every 4 seconds
+
+        return () => clearInterval(timer);
+    }, [galleryImages.length]);
 
     const categories = [
         "All",
@@ -212,68 +228,98 @@ const Gallery = () => {
 
             {/* Training CTA */}
             <section className="section-padding bg-white">
-                <div className="section-container">
-                    <div className="relative overflow-hidden rounded-2xl">
-                        <div className="absolute inset-0">
-                            <img
-                                src="/assets/img30.jpeg"
-                                alt="Training"
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-black/85"></div>
+            <div className="section-container">
+                <div className="relative overflow-hidden rounded-2xl">
+                    {/* Background */}
+                    <div className="absolute inset-0">
+                        <img
+                            src="/assets/img30.jpeg"
+                            alt="Training Background"
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/85"></div>
+                    </div>
+
+                    <div className="relative z-10 py-10 px-6  lg:p-16 grid lg:grid-cols-2 gap-12 items-center">
+                        
+                        {/* Left Content */}
+                        <div className="text-center lg:text-left">
+                            <span className="text-xs font-semibold tracking-widest uppercase text-amber-400 mb-4 block">
+                                Careers
+                            </span>
+                            <h2 className="text-3xl font-display font-bold text-white mb-4">
+                                Internship & Professional Training
+                            </h2>
+                            <p className="text-white/50 leading-relaxed mb-8">
+                                Nidaan also serves as a premium learning space for psychology
+                                students, special education trainees, and rehabilitation
+                                professionals.
+                            </p>
+                            <div className="grid grid-cols-2 gap-3 mb-8 text-left">
+                                {[
+                                    "Psychology Students",
+                                    "Special Educators",
+                                    "Rehab Interns",
+                                    "Volunteers",
+                                ].map((item) => (
+                                    <div
+                                        key={item}
+                                        className="flex items-center gap-2 text-white/70 text-sm font-medium"
+                                    >
+                                        <div className="w-1.5 h-1.5 bg-[#FFCC00] rounded-full shrink-0"></div>
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                            <Link
+                                href="/get-involved"
+                                className="btn-primary w-full sm:w-auto gap-2 inline-flex items-center justify-center"
+                            >
+                                Apply for Internship <ArrowRight size={16} />
+                            </Link>
                         </div>
-                        <div className="relative z-10 p-10 lg:p-16 grid lg:grid-cols-2 gap-12 items-center">
-                            <div className="text-center lg:text-left">
-                                <span className="text-xs font-semibold tracking-widest uppercase text-amber-400 mb-4 block">
-                                    Careers
-                                </span>
-                                <h2 className="text-3xl font-display font-bold text-white mb-4">
-                                    Internship & Professional Training
-                                </h2>
-                                <p className="text-white/50 leading-relaxed mb-8">
-                                    Nidaan also serves as a premium learning space for psychology
-                                    students, special education trainees, and rehabilitation
-                                    professionals.
-                                </p>
-                                <div className="grid grid-cols-2 gap-3 mb-8 text-left">
-                                    {[
-                                        "Psychology Students",
-                                        "Special Educators",
-                                        "Rehab Interns",
-                                        "Volunteers",
-                                    ].map((item) => (
-                                        <div
-                                            key={item}
-                                            className="flex items-center gap-2 text-white/70 text-sm font-medium"
-                                        >
-                                            <div className="w-1.5 h-1.5 bg-[#FFCC00] rounded-full"></div>
-                                            {item}
-                                        </div>
+
+                        {/* Right Content - Automatic Image Carousel */}
+                        <div className="flex items-center justify-center">
+                            <div className="relative w-full sm:w-[800px] h-[380px] sm:h-[500px] rounded-2xl overflow-hidden border border-white/10 group shadow-2xl">
+                                
+                                {/* Images */}
+                                {galleryImages.map((src, idx) => (
+                                    <img
+                                        key={idx}
+                                        src={src}
+                                        alt={`Training Gallery Image ${idx + 1}`}
+                                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                                            idx === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+                                        }`}
+                                    />
+                                ))}
+
+                                {/* Overlay & Text */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-20 pointer-events-none"></div>
+
+                                {/* Carousel Indicators */}
+                                <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2 z-30">
+                                    {galleryImages.map((_, idx) => (
+                                        <button
+                                            key={idx}
+                                            onClick={() => setCurrentSlide(idx)}
+                                            className={`h-1.5 rounded-full transition-all duration-300 ${
+                                                idx === currentSlide 
+                                                    ? "bg-[#FFCC00] w-6" 
+                                                    : "bg-white/50 w-2 hover:bg-white"
+                                            }`}
+                                            aria-label={`Go to slide ${idx + 1}`}
+                                        />
                                     ))}
                                 </div>
-                                <Link
-                                    href="/get-involved"
-                                    className="btn-primary w-full sm:w-auto gap-2"
-                                >
-                                    Apply for Internship <ArrowRight size={16} />
-                                </Link>
-                            </div>
-                            <div className="flex items-center justify-center">
-                                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-10 border border-white/10 text-center">
-                                    <Camera size={48} className="text-[#FFCC00] mx-auto mb-4" />
-                                    <h3 className="text-xl font-bold text-white mb-2">
-                                        Training Gallery
-                                    </h3>
-                                    <p className="text-white/40 text-sm">
-                                        View our professional development workshops and training
-                                        sessions.
-                                    </p>
-                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
         </div>
     );
 };

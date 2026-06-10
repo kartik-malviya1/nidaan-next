@@ -41,7 +41,7 @@ const WhyNidaan = () => {
     },
     {
       title: 'Transparency',
-      desc: 'CWe maintain openness, trust, and clear communication in all our relationships and processes.  ',
+      desc: 'We maintain openness, trust, and clear communication in all our relationships and processes.  ',
       icon: <Eye size={24} />,
       color: 'bg-sky-50 text-sky-600',
     },

@@ -9,25 +9,25 @@ const ProgramsSection = () => {
       title: "Education & Skills",
       desc: "NIOS support, special education, and vocational training for independence.",
       icon: <BookOpen />,
-      image: "/therapy7.png",
+      image: "/therapy6.png",
     },
     {
       title: "Therapeutic Services",
       desc: "Occupational, speech, and sensory integration therapies under one roof.",
       icon: <Stethoscope />,
-      image: "/therapy2.png",
+      image: "/Therapeutic services.png",
     },
     {
       title: "Psychological Services",
       desc: "Psychometric assessments, ABA therapy, and emotional counseling for families.",
       icon: <Brain />,
-      image: "/therapy3.png",
+      image: "/psychological-services.png",
     },
     {
       title: "Enrichment Activities",
       desc: "Music, dance, theatre, and sports to foster confidence and social skills.",
       icon: <Zap />,
-      image: "/therapy4.png",
+      image: "/Enrichment and recreational.png",
     },
   ];
 

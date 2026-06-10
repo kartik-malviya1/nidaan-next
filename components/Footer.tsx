@@ -40,152 +40,158 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-black text-white border-t border-[#FFCC00]/20">
-      {/* Main footer */}
-      <div className="section-container py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
-            <Link href="/" className="inline-block mb-6">
-              <img
-                src="/logo.jpg"
-                alt="Nidaan Logo"
-                className="h-14 w-auto object-contain"
-              />
-            </Link>
-            <p className="text-sm leading-relaxed mb-6 max-w-xs">
-              Where Every Potential Unfolds — <br />Together We Strive, Together We Thrive.
-            </p>
-            <div className="flex gap-3">
-              {[
-                {
-                  icon: <FacebookIcon />,
-                  href: "https://www.facebook.com/NidaanNIRT/",
-                },
-                {
-                  icon: <InstagramIcon />,
-                  href: "https://www.instagram.com/nidaannirt/",
-                },
-                 {
-                  icon: <YoutubeIcon />,
-                  href: "https://www.youtube.com/@nidaannirt",
-                },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#ffcc00] hover:text-white transition-all duration-300"
-                >
-                  {social.icon}
-                </a>
-              ))}
+   <footer className="bg-black text-white border-t border-[#FFCC00]/20">
+  {/* Main footer */}
+  <div className="section-container py-16 lg:py-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+      {/* Brand */}
+      <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
+        <Link href="/" className="inline-block mb-6">
+          <img
+            src="/logo.jpg"
+            alt="Nidaan Logo"
+            className="h-14 w-auto object-contain"
+          />
+        </Link>
+        <p className="text-sm leading-relaxed mb-6 max-w-xs">
+          Where Every Potential Unfolds — <br />Together We Strive, Together We Thrive.
+        </p>
+        <div className="flex gap-3">
+          {[
+            {
+              icon: <FacebookIcon />,
+              href: "https://www.facebook.com/NidaanNIRT/",
+            },
+            {
+              icon: <InstagramIcon />,
+              href: "https://www.instagram.com/nidaannirt/",
+            },
+            {
+              icon: <YoutubeIcon />,
+              href: "https://www.youtube.com/@nidaannirt",
+            },
+          ].map((social, i) => (
+            <a
+              key={i}
+              href={social.href}
+              className="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#ffcc00] hover:text-white transition-all duration-300"
+            >
+              {social.icon}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      {/* Quick Links */}
+      <div className="lg:col-span-2">
+        <h4 className="text-white font-bold text-sm mb-5">Quick Links</h4>
+        <ul className="space-y-3">
+          {quickLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.path}
+                className="text-sm hover:text-[#ffcc00] transition-colors inline-flex items-center gap-1 group"
+              >
+                {link.name}
+                <ArrowUpRight
+                  size={12}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Our Services */}
+      <div className="lg:col-span-3">
+        <h4 className="text-white font-bold text-sm mb-5">Our Services</h4>
+        <ul className="space-y-3">
+          {services.map((item) => (
+            <li key={item}>
+              <Link
+                href="/services"
+                className="text-sm hover:text-[#ffcc00] transition-colors"
+              >
+                {item}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Contact */}
+      <div className="lg:col-span-3">
+        <h4 className="text-white font-bold text-sm mb-5">Contact</h4>
+        <ul className="space-y-5">
+          
+          {/* Bhopal Location */}
+          <li className="flex gap-3 items-start">
+            <MapPin className="text-[#ffcc00] shrink-0 mt-1.5" size={16} />
+            <div className="w-full">
+              <p className="text-xs text-white font-medium uppercase tracking-wider mb-0.5">
+                Bhopal
+              </p>
+              <p className="text-sm">G-55, Rajved Colony, Priyanka Nagar</p>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29346.742294571086!2d77.37780397431638!3d23.157685999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c450f7d2c274b%3A0x5083b4481cfbc8c2!2sNidaan%20Childcare%20Therapy%20Centre%20and%20Inclusive%20School!5e0!3m2!1sen!2sin!4v1781082352497!5m2!1sen!2sin" 
+                className="w-full h-28 rounded-md mt-2 border-0" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="lg:col-span-2">
-            <h4 className="text-white font-bold text-sm mb-5">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.path}
-                    className="text-sm hover:text-[#ffcc00] transition-colors inline-flex items-center gap-1 group"
-                  >
-                    {link.name}
-                    <ArrowUpRight
-                      size={12}
-                      className="opacity-0 group-hover:opacity-100 transition-opacity"
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div className="lg:col-span-3">
-            <h4 className="text-white font-bold text-sm mb-5">Our Services</h4>
-            <ul className="space-y-3">
-              {services.map((item) => (
-                <li key={item}>
-                  <Link
-                    href="/services"
-                    className="text-sm hover:text-[#ffcc00] transition-colors"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-         <div className="lg:col-span-3">
-  <h4 className="text-white font-bold text-sm mb-5">Contact</h4>
-  <ul className="space-y-4">
-    
-    {/* Bhopal Location */}
-    <li className="flex gap-3 items-start">
-      <MapPin className="text-[#ffcc00] shrink-0 mt-1.5" size={16} />
-      <div>
-        <p className="text-xs text-white font-medium uppercase tracking-wider mb-0.5">
-          Bhopal
-        </p>
-        <p className="text-sm">G-55, Rajved Colony, Priyanka Nagar</p>
+          </li>
+          
+          {/* Indore Location */}
+          <li className="flex gap-3 items-start">
+            <MapPin className="text-[#ffcc00] shrink-0 mt-1.5" size={16} />
+            <div className="w-full">
+              <p className="text-xs text-white font-medium uppercase tracking-wider mb-0.5">
+                Indore
+              </p>
+              <p className="text-sm">
+                493-B, Scheme No. 103, Near Sahaj Palash
+              </p>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.2788910519994!2d75.84103147515397!3d22.680659579414883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fdaf8d8cfe51%3A0xa282551646d3e095!2sNidaan%20Institute%20of%20Rehabilitation%20Training%20%26%20Inclusive%20School!5e0!3m2!1sen!2sin!4v1781082440404!5m2!1sen!2sin" 
+                className="w-full h-28 rounded-md mt-2 border-0" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </li>
+          
+          {/* Phone */}
+          <li className="flex gap-3 items-center pt-2">
+            <Phone className="text-[#ffcc00] shrink-0" size={16} />
+            <span className="text-sm">1800 890 4648 (Toll-Free)</span>
+          </li>
+          
+          {/* Mail */}
+          <li className="flex gap-3 items-center">
+            <Mail className="text-[#ffcc00] shrink-0" size={16} />
+            <span className="text-sm">nirtnidaan@gmail.com</span>
+          </li>
+          
+        </ul>
       </div>
-    </li>
-    
-    {/* Indore Location */}
-    <li className="flex gap-3 items-start">
-      <MapPin className="text-[#ffcc00] shrink-0 mt-1.5" size={16} />
-      <div>
-        <p className="text-xs text-white font-medium uppercase tracking-wider mb-0.5">
-          Indore
-        </p>
-        <p className="text-sm">
-          493-B, Scheme No. 103, Near Sahaj Palash
-        </p>
-      </div>
-    </li>
-    
-    {/* Phone */}
-    <li className="flex gap-3 items-center">
-      <Phone className="text-[#ffcc00] shrink-0" size={16} />
-      <span className="text-sm">1800 890 4648 (Toll-Free)</span>
-    </li>
-    
-    {/* Mail */}
-    <li className="flex gap-3 items-center">
-      <Mail className="text-[#ffcc00] shrink-0" size={16} />
-      <span className="text-sm">nirtnidaan@gmail.com</span>
-    </li>
-    
-  </ul>
-</div>
-        </div>
-      </div>
+    </div>
+  </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-[#FFCC00]/20 bg-black">
-        <div className="section-container py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/70">
-            © {new Date().getFullYear()} {" "} Nidaan Sewa Samiti. All rights reserved.
-          </p>
-          <div className="flex gap-6 text-xs text-white">
-            {/* <a href="#" className="hover:text-[#FFCC00] transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-[#FFCC00] transition-colors">
-              Terms of Service
-            </a> */}
-            <a href="https://tanxinnovations.com/" target="_blank" className="hover:text-[#FFCC00] transition-colors">
-              Made with ❤️ by tanX Innovations
-            </a>
-          </div>
-        </div>
+  {/* Bottom bar */}
+  <div className="border-t border-[#FFCC00]/20 bg-black">
+    <div className="section-container py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p className="text-xs text-white/70">
+        © {new Date().getFullYear()} {" "} Nidaan Sewa Samiti. All rights reserved.
+      </p>
+      <div className="flex gap-6 text-xs text-white">
+        <a href="https://tanxinnovations.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#FFCC00] transition-colors">
+          Made with ❤️ by tanX Innovations
+        </a>
       </div>
-    </footer>
+    </div>
+  </div>
+</footer>
   );
 };
 
