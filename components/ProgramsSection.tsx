@@ -15,7 +15,7 @@ const ProgramsSection = () => {
       title: "Therapeutic Services",
       desc: "Occupational, speech, and sensory integration therapies under one roof.",
       icon: <Stethoscope />,
-      image: "/Therapeutic services.png",
+      image: "/Enrichment and recreational.png",
     },
     {
       title: "Psychological Services",
@@ -27,7 +27,7 @@ const ProgramsSection = () => {
       title: "Enrichment Activities",
       desc: "Music, dance, theatre, and sports to foster confidence and social skills.",
       icon: <Zap />,
-      image: "/Enrichment and recreational.png",
+      image: "/Therapeutic-services.png ",
     },
   ];
 

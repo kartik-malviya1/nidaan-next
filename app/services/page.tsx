@@ -26,7 +26,7 @@ const Services = () => {
       title: "Therapeutic Services",
       description:
         "Our therapeutic interventions are designed to enhance functional abilities, communication skills, sensory processing, and overall quality of life.",
-      image: "/Therapeutic services.png",
+      image: "/Enrichment and recreational.png",
       details: [
         { label: "Speech Therapy", desc: "Supports the development of speech, language, communication, and social interaction skills."},
         { label: "Occupational Therapy ", desc: "Focuses on improving sensory processing, motor coordination, cognitive abilities, and daily living skills." },
@@ -53,7 +53,7 @@ const Services = () => {
       title: "Enrichment & Recreational Activities",
       description:
         "Our enrichment programs are designed to foster creativity, confidence, social engagement, and overall holistic development.",
-      image: "/Enrichment and recreational.png",
+      image: "/Therapeutic-services.png ",
       details: [
         { label: "Pre-Vocational Training", desc: "Foundational skill-building activities that prepare individuals for vocational readiness and independent living." },
         { label: "Music, Dance & Theatre", desc: "Creative expression platforms that build confidence, enhance communication, and encourage teamwork." },
