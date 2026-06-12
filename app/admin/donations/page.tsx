@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDonations } from "@/hooks/use-donations";
 import DonationsEmptyState from "@/components/admin/donations/donations-empty-state";
 import DonationDetailModal from "@/components/admin/donations/donation-detail-modal";
@@ -25,13 +25,23 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function DonationsPage() {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [sortBy, setSortBy] = useState<string>("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [selectedDonation, setSelectedDonation] = useState<Donation | null>(null);
 
+  // Debounce search by 350ms
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPage(1);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const { data, isLoading, error } = useDonations({
     page,
-    search: searchQuery,
+    search: debouncedSearch,
     sortBy,
     sortOrder,
     limit: 10,
@@ -74,7 +84,7 @@ export default function DonationsPage() {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    setPage(1); // Reset page on filter
+    // Page reset is handled in the debounce effect
   };
 
   return (
@@ -141,7 +151,7 @@ export default function DonationsPage() {
       {!isLoading && !error && data && (
         <>
           {data.data.length === 0 ? (
-            <DonationsEmptyState hasFilters={searchQuery.length > 0} />
+            <DonationsEmptyState hasFilters={debouncedSearch.length > 0} />
           ) : (
             <div className="space-y-6">
               {/* Desktop Table View */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGalleryImages, useDeleteGalleryImage } from "@/hooks/use-gallery";
 import ImageCard from "@/components/admin/gallery/image-card";
 import GalleryEmptyState from "@/components/admin/gallery/gallery-empty-state";
@@ -27,12 +27,19 @@ const CATEGORIES = ["All", "Therapy", "Inclusive School", "Early Intervention", 
 export default function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
+  // Debounce search input by 350ms
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedSearch(searchQuery), 350);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const { data: images, isLoading, error } = useGalleryImages(
     selectedCategory === "All" ? undefined : selectedCategory,
-    searchQuery
+    debouncedSearch
   );
   
   const deleteImageMutation = useDeleteGalleryImage();
@@ -137,7 +144,7 @@ export default function GalleryPage() {
           {images.length === 0 ? (
             <GalleryEmptyState
               onUploadClick={() => setIsUploadOpen(true)}
-              hasFilters={selectedCategory !== "All" || searchQuery.length > 0}
+              hasFilters={selectedCategory !== "All" || debouncedSearch.length > 0}
             />
           ) : (
             <motion.div

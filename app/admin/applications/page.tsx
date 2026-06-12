@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useApplications } from "@/hooks/use-applications";
 import ApplicationsEmptyState from "@/components/admin/applications/applications-empty-state";
 import ApplicationDetailModal from "@/components/admin/applications/application-detail-modal";
@@ -45,15 +45,25 @@ const statusBadge: Record<string, { bg: string; text: string; border: string }> 
 export default function ApplicationsAdminPage() {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [sortBy, setSortBy] = useState<string>("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [typeFilter, setTypeFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
 
+  // Debounce search by 350ms
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPage(1);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const { data, isLoading, error } = useApplications({
     page,
-    search: searchQuery,
+    search: debouncedSearch,
     sortBy,
     sortOrder,
     limit: 10,
@@ -90,7 +100,7 @@ export default function ApplicationsAdminPage() {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    setPage(1);
+    // Page reset is handled in the debounce effect
   };
 
   const getStatusBadge = (status: string) => {
@@ -115,7 +125,7 @@ export default function ApplicationsAdminPage() {
     );
   };
 
-  const hasFilters = searchQuery.length > 0 || typeFilter.length > 0 || statusFilter.length > 0;
+  const hasFilters = debouncedSearch.length > 0 || typeFilter.length > 0 || statusFilter.length > 0;
 
   return (
     <div className="space-y-6 sm:space-y-8">

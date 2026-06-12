@@ -30,12 +30,12 @@ export async function GET(req: Request) {
     if (search) {
       conditions.push({
         OR: [
-          { name: { contains: search, mode: "insensitive" as const } },
-          { email: { contains: search, mode: "insensitive" as const } },
-          { phone: { contains: search, mode: "insensitive" as const } },
-          { city: { contains: search, mode: "insensitive" as const } },
-          { institution: { contains: search, mode: "insensitive" as const } },
-          { area: { contains: search, mode: "insensitive" as const } },
+          { name: { contains: search } },
+          { email: { contains: search } },
+          { phone: { contains: search } },
+          { city: { contains: search } },
+          { institution: { contains: search } },
+          { area: { contains: search } },
         ],
       });
     }

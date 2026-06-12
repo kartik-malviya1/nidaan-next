@@ -18,10 +18,10 @@ export async function GET(req: Request) {
     const whereCondition = search
       ? {
           OR: [
-            { name: { contains: search, mode: "insensitive" as const } },
-            { email: { contains: search, mode: "insensitive" as const } },
-            { phoneNumber: { contains: search, mode: "insensitive" as const } },
-            { message: { contains: search, mode: "insensitive" as const } },
+            { name: { contains: search } },
+            { email: { contains: search } },
+            { phoneNumber: { contains: search } },
+            { message: { contains: search } },
           ],
         }
       : {};

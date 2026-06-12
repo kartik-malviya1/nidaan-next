@@ -36,10 +36,10 @@ export async function GET(req: Request) {
     const whereCondition = search
       ? {
           OR: [
-            { name: { contains: search, mode: "insensitive" as const } },
-            { phoneNumber: { contains: search, mode: "insensitive" as const } },
-            { panCard: { contains: search, mode: "insensitive" as const } },
-            { transactionId: { contains: search, mode: "insensitive" as const } },
+            { name: { contains: search } },
+            { phoneNumber: { contains: search } },
+            { panCard: { contains: search } },
+            { transactionId: { contains: search } },
           ],
         }
       : {};

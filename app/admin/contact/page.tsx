@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useContacts } from "@/hooks/use-contact";
 import ContactsEmptyState from "@/components/admin/contact/contacts-empty-state";
 import ContactDetailModal from "@/components/admin/contact/contact-detail-modal";
@@ -23,13 +23,23 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function ContactsAdminPage() {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [sortBy, setSortBy] = useState<string>("createdAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
+  // Debounce search by 350ms
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPage(1);
+    }, 350);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   const { data, isLoading, error } = useContacts({
     page,
-    search: searchQuery,
+    search: debouncedSearch,
     sortBy,
     sortOrder,
     limit: 10,
@@ -64,7 +74,7 @@ export default function ContactsAdminPage() {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    setPage(1); // Reset page on filter
+    // Page reset is handled in the debounce effect
   };
 
   return (
@@ -131,7 +141,7 @@ export default function ContactsAdminPage() {
       {!isLoading && !error && data && (
         <>
           {data.data.length === 0 ? (
-            <ContactsEmptyState hasFilters={searchQuery.length > 0} />
+            <ContactsEmptyState hasFilters={debouncedSearch.length > 0} />
           ) : (
             <div className="space-y-6">
               {/* Desktop Table View */}

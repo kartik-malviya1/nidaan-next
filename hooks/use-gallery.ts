@@ -13,6 +13,7 @@ export function useGalleryImages(category?: string, search?: string) {
   return useQuery<GalleryImage[]>({
     queryKey: ["gallery-images", category, search],
     queryFn: () => apiClient.get<GalleryImage[]>(endpoint),
+    staleTime: 30_000,
   });
 }
 

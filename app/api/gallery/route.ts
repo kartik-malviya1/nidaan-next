@@ -11,11 +11,11 @@ export async function GET(req: Request) {
     const where: any = {};
 
     if (category && category !== "all" && category !== "All") {
-      where.category = { equals: category, mode: "insensitive" };
+      where.category = { equals: category };
     }
 
     if (search) {
-      where.title = { contains: search, mode: "insensitive" };
+      where.title = { contains: search };
     }
 
     const images = await prisma.gallery.findMany({
