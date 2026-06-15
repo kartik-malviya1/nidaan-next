@@ -73,8 +73,31 @@ const About = () => {
         "/Lions_Clubs_International_logo.svg.png",
         "/Rotary_International_Logo.svg.png",
         "/bank of baroda.png",
+        "/BSSS.png",
+        "/BU.webp",
+        "/Billabong.jpg",
+        "/craftizen.webp",
+        "/christ-bangalore.png",
+        "/DAVV.png",
+        "/DPS.png",
+        "/IEHE.jpg",
+        "/IGNOU.png",
+        "/IIFT.png",
+        "/JLU.webp",
+        "/MLB.png",
+        "/nift.png",
+        "/NMIMIS.png",
+        "/Sarojni.jpg",
+        "/shim.png",
+        "/SYMBIOSIS.png",
+        "/TISS.svg",
+        "/TSVS.png",
         "/canara bank.png",
         "/vidhigya.png",
+        "/Banaras.png",
+        "/Banasthali.png",
+
+
     ];
 
     return (
@@ -448,8 +471,8 @@ const About = () => {
 
             {/* Supporters */}
             <section className="section-padding bg-amber-50">
-                <div className="section-container">
-                    <div className="text-center max-w-2xl mx-auto mb-14">
+                <div className="">
+                    <div className="text-center max-w-full mx-auto mb-14">
                         <span className="text-xs font-semibold tracking-widest uppercase text-[#F90D41] mb-4 block">
                             Partners
                         </span>
@@ -471,7 +494,7 @@ const About = () => {
                                     key={index}
                                     src={logo}
                                     alt="Partner Logo"
-                                    className="h-16 md:h-20 w-auto object-contain mix-blend-multiply opacity-60 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0"
+                                    className="h-16 md:h-20 w-auto object-contain mix-blend-multiply opacity-70 hover:opacity-100 transition-all duration-300"
                                 />
                             ))}
                         </motion.div>
