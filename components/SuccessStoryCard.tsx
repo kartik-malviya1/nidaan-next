@@ -111,9 +111,6 @@ export function SuccessStoryCard({
           <line x1="65" y1="30" x2="90" y2="25" />
         </svg>
 
-        <FlowerIcon color="#F8B4B8" className="absolute top-6 -left-4 w-10 h-10 -rotate-12 z-20 drop-shadow-sm" />
-        <FlowerIcon color="#F8D0AD" className="absolute top-1/2 -left-6 -translate-y-1/2 w-8 h-8 rotate-12 z-20 drop-shadow-sm" />
-        <FlowerIcon color="#A8D3D8" className="absolute top-3/4 -left-2 w-9 h-9 -rotate-45 z-20 drop-shadow-sm" />
 
         {/* The Cyan Box Container */}
         {/* Normal balanced padding now, since the image no longer overlaps into the box */}
