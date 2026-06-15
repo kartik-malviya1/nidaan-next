@@ -160,7 +160,7 @@ const storiesData = [
   {
     id: 5,
     name: "Virat Saini",
-    imageSrc: "/saini.png",
+    imageSrc: "/Saini.png",
     description: "Congradulations For Securing Admission in Kiddies Paradise For Session 2025-2026, Kendriya Vidhyalay Sagar For 2026-2027."
   }
 ];
