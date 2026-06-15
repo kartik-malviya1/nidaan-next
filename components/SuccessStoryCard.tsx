@@ -229,7 +229,7 @@ export function SucStory() {
           {scrollingStories.map((story, index) => (
             <div
               key={`${story.id}-${index}`}
-              className="relative w-[380px] sm:w-[450px] md:w-[490px] shrink-0 flex flex-col group pb-10"
+              className="relative w-[396px] sm:w-[450px] md:w-[490px] shrink-0 flex flex-col group pb-10"
             >
               <SuccessStoryCard
                 name={story.name}
