@@ -11,6 +11,7 @@ import ProgramsSection from "../components/ProgramsSection";
 import WhyNidaan from "../components/WhyNidaan";
 import ImpactSection from "../components/ImpactSection";
 import Testimonials from "../components/Testimonials";
+import { SucStory } from "@/components/SuccessStoryCard";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <AboutSection />
       <Journey />
       {/* <CaseStudies /> */}
+      <SucStory />
       <ProgramsSection />
       <WhyNidaan />
       <ImpactSection />

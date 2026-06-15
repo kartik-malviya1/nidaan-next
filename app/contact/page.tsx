@@ -125,7 +125,7 @@ const Contact = () => {
                                         {
                                             icon: <Clock size={18} />,
                                             label: "Working Hours",
-                                            value: "Mon – Fri: 10:00 – 5:30",
+                                            value: "Mon – Sat: 9:30 – 5:30",
                                         },
                                     ].map((item, i) => (
                                         <div
@@ -156,18 +156,18 @@ const Contact = () => {
                                 <div className="space-y-4">
                                     <div className="relative overflow-hidden rounded-xl p-6">
                                         <div className="absolute inset-0 bg-[#ffcc00]"></div>
-                                        <div className="relative z-10 text-white">
+                                        <div className="relative z-10 text-black">
                                             <div className="flex items-center gap-2 mb-3">
                                                 <MapPin size={16} />
                                                 <h4 className="font-bold text-sm">Bhopal Campus</h4>
                                             </div>
-                                            <p className="text-white/80 text-xs leading-relaxed mb-3">
+                                            <p className="text-black text-xs leading-relaxed mb-3">
                                                 G-55, Rajved Colony, Priyanka Nagar, Kolar Road, Bhopal
                                                 – 462042
                                             </p>
-                                            <div className="text-[10px] font-medium text-white/60 space-y-0.5">
-                                                <p>98269 34500</p>
-                                                <p>98263 98520</p>
+                                            <div className="text-[10px] font-medium text-black space-y-0.5">
+                                                <p className="text-black">98269 34500</p>
+                                                <p className="text-black">98263 98520</p>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@ const Contact = () => {
                                         <div className="relative z-10 text-white">
                                             <div className="flex items-center gap-2 mb-3">
                                                 <MapPin size={16} />
-                                                <h4 className="font-bold text-sm">Indore Center</h4>
+                                                <h4 className="font-bold text-sm text-white/70">Indore Center</h4>
                                             </div>
                                             <p className="text-white/50 text-xs leading-relaxed mb-3">
                                                 493-B, Scheme No. 103, Near Sahaj Palash Residency,
