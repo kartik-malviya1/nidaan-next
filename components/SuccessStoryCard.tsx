@@ -138,7 +138,7 @@ const storiesData = [
   },
   {
     id: 2,
-    name: "Parath Jhonjhare",
+    name: "Parth Jhonjhare",
     imageSrc: "/Parth.png",
     description: "Congratulations on your admission in Kendriya Vidhyalay 3 Bhopal. Parth is now a Student of Class 2"
   },
